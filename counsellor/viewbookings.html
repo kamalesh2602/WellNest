@@ -63,7 +63,7 @@
             } catch (error) {
                 console.error('Fetch error:', error);
                 showError(error.message.includes('404')
-                    ? 'Server endpoint not found. Please contact support.'
+                    ? 'Bookings not found.'
                     : error.message
                 );
             } finally {
