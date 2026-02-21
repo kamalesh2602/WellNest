@@ -72,7 +72,7 @@
 <script>
     async function fetchCounsellors() {
         try {
-            const response = await fetch('http://localhost:3000/admin/counsellors');
+            const response = await fetch('/admin/counsellors');
             const data = await response.json();
             const tbody = document.querySelector('#counsellorTable tbody');
             tbody.innerHTML = '';
@@ -94,7 +94,7 @@
 
     async function deleteCounsellor(id) {
         try {
-            await fetch(`http://localhost:3000/admin/counsellors/${id}`, { method: 'DELETE' });
+            await fetch(`/admin/counsellors/${id}`, { method: 'DELETE' });
             fetchCounsellors(); // Refresh list after deletion
         } catch (error) {
             console.error('Error deleting counsellor:', error);

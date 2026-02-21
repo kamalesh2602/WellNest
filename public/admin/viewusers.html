@@ -72,7 +72,7 @@
     <script>
         async function fetchUsers() {
             try {
-                const response = await fetch('http://localhost:3000/admin/users');
+                const response = await fetch('/admin/users');
                 const data = await response.json();
                 const tbody = document.querySelector('#userTable tbody');
                 tbody.innerHTML = '';
@@ -95,7 +95,7 @@
 
         async function deleteUser(id) {
             try {
-                await fetch(`http://localhost:3000/admin/users/${id}`, 
+                await fetch(`/admin/users/${id}`, 
                 { method: 'DELETE' });
                 fetchUsers(); // Refresh list after deletion
             } catch (error) {

@@ -1,10 +1,33 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Fetch and display available slots
+// ================= DYNAMIC CONFIG =================
+let EMAILJS_SERVICE_ID;
+let EMAILJS_TEMPLATE_BOOKING_ID; // booking template
+let EMAILJS_PUBLIC_KEY;
+// ==================================================
+
+
+document.addEventListener('DOMContentLoaded', async function () {
+    await loadConfig();
     fetchSlots();
 });
 
+
+async function loadConfig() {
+    try {
+        const res = await fetch('/config');
+        const config = await res.json();
+
+        EMAILJS_SERVICE_ID = config.EMAILJS_SERVICE_ID;
+        EMAILJS_TEMPLATE_BOOKING_ID = config.EMAILJS_TEMPLATE_BOOKING_ID;
+        EMAILJS_PUBLIC_KEY = config.EMAILJS_PUBLIC_KEY;
+
+    } catch (err) {
+        console.error("Failed to load config:", err);
+    }
+}
+
+
 function fetchSlots() {
-    fetch('http://localhost:3000/getslots')
+    fetch('/getslots')
         .then(response => response.json())
         .then(slots => {
             displaySlots(slots);
@@ -15,9 +38,10 @@ function fetchSlots() {
         });
 }
 
+
 function displaySlots(slots) {
     const mainDiv = document.getElementById('main');
-    mainDiv.innerHTML = ''; // Clear previous content
+    mainDiv.innerHTML = '';
 
     if (slots.length === 0) {
         mainDiv.innerHTML = '<p>No available slots at the moment. Please check back later.</p>';
@@ -56,11 +80,11 @@ function displaySlots(slots) {
     mainDiv.appendChild(slotsContainer);
 }
 
+
 function bookSlot(slot) {
-    // In a real app, you'd get this from your authentication system
     const userId = localStorage.getItem("userId");
-    const userName = localStorage.getItem("userName")
-    
+    const userName = localStorage.getItem("userName");
+
     if (!userId || !userName) {
         alert('Booking cancelled. User information is required.');
         return;
@@ -71,47 +95,52 @@ function bookSlot(slot) {
         userName: userName,
         counsellorName: slot.counsellorName,
         counsellorEmail: slot.counsellorEmail,
-        counsellorType : slot.counsellorType,
+        counsellorType: slot.counsellorType,
         date: slot.slotDate,
         time: slot.slotTime,
         slotId: slot._id
     };
 
-    fetch('http://localhost:3000/bookslot', {
+    fetch('/bookslot', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(bookingData)
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.message === 'Booking successful!') {
-          sendConfirmationEmail(bookingData);
-            alert('Booking successful!');
-            window.location.href = "video.html"
-            
-        } else {
-            throw new Error(data.message || 'Booking failed');
-        }
-    })
-    .catch(error => {
-        console.error('Error booking slot:', error);
-        alert('Booking failed. Please try again.');
-    });
+        .then(response => response.json())
+        .then(data => {
+            if (data.message === 'Booking successful!') {
+                sendConfirmationEmail(bookingData);
+                alert('Booking successful!');
+                window.location.href = "video.html";
+            } else {
+                throw new Error(data.message || 'Booking failed');
+            }
+        })
+        .catch(error => {
+            console.error('Error booking slot:', error);
+            alert('Booking failed. Please try again.');
+        });
 }
 
+
 function sendConfirmationEmail(bookingData) {
+
     const templateParams = {
         userName: bookingData.userName,
         counsellorEmail: bookingData.counsellorEmail,
         counsellor_name: bookingData.counsellorName,
         date: bookingData.date,
         time: bookingData.time,
-        
     };
 
-    emailjs.send('service_ax4bsyj', 'template_2d3vems', templateParams)
+    emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_BOOKING_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+    )
         .then(response => {
             console.log('Email sent successfully:', response);
         })

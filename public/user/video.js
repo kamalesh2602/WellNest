@@ -1,3 +1,11 @@
+// ================= DYNAMIC CONFIG =================
+let EMAILJS_SERVICE_ID;
+let EMAILJS_TEMPLATE_ID;
+let EMAILJS_PUBLIC_KEY;
+let JITSI_DOMAIN;
+// ==================================================
+
+
 const userId = localStorage.getItem('userId');
 const userName = localStorage.getItem('userName');
 const meetingInfoDiv = document.getElementById('meeting-info');
@@ -6,26 +14,45 @@ const joinBtn = document.getElementById('join-btn');
 const timeMessage = document.getElementById('time-message');
 
 let activeBooking = null;
+let api;
+
+
+// 🔥 Load config from backend
+async function loadConfig() {
+  try {
+    const res = await fetch('/config');
+    const config = await res.json();
+
+    EMAILJS_SERVICE_ID = config.EMAILJS_SERVICE_ID;
+    EMAILJS_TEMPLATE_ID = config.EMAILJS_TEMPLATE_ID;
+    EMAILJS_PUBLIC_KEY = config.EMAILJS_PUBLIC_KEY;
+    JITSI_DOMAIN = config.JITSI_DOMAIN;
+  } catch (err) {
+    console.error("Failed to load config:", err);
+  }
+}
+
 
 async function fetchBookings() {
   try {
-    const res = await fetch(`http://localhost:3000/getbookings?userId=${userId}`);
+    const res = await fetch(`/getbookings?userId=${userId}`);
     const bookings = await res.json();
 
     if (bookings.length === 0) {
       meetingInfoDiv.innerHTML = "<p>No bookings found.</p>";
       joinBtn.style.display = "none";
     } else {
-      activeBooking = bookings[0]; // Assuming one booking per user
+      activeBooking = bookings[0];
       displayBooking(activeBooking);
-      checkMeetingStart(); // Initial check
-      setInterval(checkMeetingStart, 30000); // Check every 30 seconds
+      checkMeetingStart();
+      setInterval(checkMeetingStart, 30000);
     }
   } catch (err) {
     console.error("Error fetching bookings:", err);
     meetingInfoDiv.innerHTML = "<p>Failed to load bookings.</p>";
   }
 }
+
 
 function displayBooking(booking) {
   meetingInfoDiv.innerHTML = `
@@ -34,6 +61,7 @@ function displayBooking(booking) {
     <p><strong>Time:</strong> ${booking.time}</p>
   `;
 }
+
 
 function checkMeetingStart() {
   if (!activeBooking) return;
@@ -46,27 +74,27 @@ function checkMeetingStart() {
     timeMessage.textContent = "Meeting is starting now!";
     joinBtn.disabled = false;
 
-    const meetingLink = `https://meet.jit.si/WellNest-${activeBooking._id}`;
+    const meetingLink = `https://${JITSI_DOMAIN}/WellNest-${activeBooking._id}`;
 
-    // Notify the counsellor by email when the user joins
-    fetch('http://localhost:3000/send-meeting-link', {
+    fetch('/send-meeting-link', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ bookingId: activeBooking._id })
     })
       .then(res => res.json())
-      .then(data => {
+      .then(() => {
+
         emailjs.send(
-          'service_ax4bsyj', // Replace with your service ID
-          'template_96idk0d', // Replace with your template ID
+          EMAILJS_SERVICE_ID,
+          EMAILJS_TEMPLATE_ID,
           {
-            to_email: activeBooking.counsellorEmail, // ⬅️ This sends to counsellor
+            to_email: activeBooking.counsellorEmail,
             counsellor_name: activeBooking.counsellorName,
             user_name: activeBooking.userName,
-            meeting_link: `https://meet.jit.si/WellNest-${activeBooking._id}`,
+            meeting_link: meetingLink,
             date_time: `${activeBooking.date} at ${activeBooking.time}`
-                  },
-          'Uyf-kE1C7m379m9eg' // Replace with your EmailJS public key
+          },
+          EMAILJS_PUBLIC_KEY
         )
           .then(response => {
             console.log('✅ Email sent successfully:', response.status, response.text);
@@ -77,11 +105,13 @@ function checkMeetingStart() {
 
         console.log('📧 Email sent + meeting started');
         showJitsiMeeting();
-        activeBooking = null; // Prevent duplicate joins
+        activeBooking = null;
+
       })
       .catch(err => {
         console.error('❌ Meeting trigger failed:', err);
       });
+
   } else {
     const minutesLeft = Math.floor(diffMinutes);
     timeMessage.textContent = `Meeting will start in ${minutesLeft} minute(s).`;
@@ -89,13 +119,13 @@ function checkMeetingStart() {
   }
 }
 
-joinBtn.addEventListener('click', showJitsiMeeting);
 
-let api;
+joinBtn.addEventListener('click', showJitsiMeeting);
 
 
 function showJitsiMeeting() {
-  const domain = "meet.jit.si";
+  const domain = JITSI_DOMAIN;
+
   const options = {
     roomName: `WellNest-${activeBooking._id}`,
     parentNode: document.getElementById('meet'),
@@ -108,16 +138,18 @@ function showJitsiMeeting() {
 
   api = new JitsiMeetExternalAPI(domain, options);
 
-  api.addEventListener("participantLeft", function(event) {
-    document.getElementById('meet').innerHTML = ""; // Remove Jitsi iframe
-        setTimeout(() => {
-            window.location.href = "feedback.html"; // Redirect to feedback page
-        }, 3000);
-    });
+  api.addEventListener("participantLeft", function () {
+    document.getElementById('meet').innerHTML = "";
+    setTimeout(() => {
+      window.location.href = "feedback.html";
+    }, 3000);
+  });
 
-  joinBtn.style.display = "none"; // Hide join button after joining
+  joinBtn.style.display = "none";
 }
 
 
-// Start the flow
-fetchBookings();
+// 🔥 Start flow only after config loads
+loadConfig().then(() => {
+  fetchBookings();
+});

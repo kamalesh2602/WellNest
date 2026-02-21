@@ -12,6 +12,15 @@ app.use(express.json());
 app.use(express.static('public'));
 app.use(cors());
 
+app.get('/config', (req, res) => {
+  res.json({
+    EMAILJS_SERVICE_ID: process.env.EMAILJS_SERVICE_ID,
+    EMAILJS_TEMPLATE_ID: process.env.EMAILJS_TEMPLATE_ID,
+    EMAILJS_PUBLIC_KEY: process.env.EMAILJS_PUBLIC_KEY,
+    JITSI_DOMAIN: process.env.JITSI_DOMAIN
+  });
+});
+
 // Connect to MongoDB (Remove deprecated options)
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('✅ MongoDB Connected'))
