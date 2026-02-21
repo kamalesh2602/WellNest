@@ -17,7 +17,7 @@ async function loadConfig() {
         const config = await res.json();
 
         EMAILJS_SERVICE_ID = config.EMAILJS_SERVICE_ID;
-        EMAILJS_TEMPLATE_BOOKING_ID = config.EMAILJS_TEMPLATE_BOOKING_ID;
+        EMAILJS_TEMPLATE_BOOKING_ID = config.EMAILJS_TEMPLATE_ID;
         EMAILJS_PUBLIC_KEY = config.EMAILJS_PUBLIC_KEY;
 
     } catch (err) {
