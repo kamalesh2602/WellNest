@@ -9,6 +9,7 @@ const bcrypt = require('bcrypt');
 
 const app = express();
 app.use(express.json());
+app.use(express.static('public'));
 app.use(cors());
 
 // Connect to MongoDB (Remove deprecated options)

@@ -16,7 +16,7 @@ form.addEventListener('submit', async function (e) {
 
 
     try {
-        const response = await fetch('http://localhost:3000/admin/submit', {
+        const response = await fetch('/admin/submit', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData),
