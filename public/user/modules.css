@@ -1,127 +1,138 @@
-body {
-  margin: 0;
-  padding-top: 80px;
-  background-image: url("../assets/bg2.jpg");
-  background-size: cover;
-  background-position: center;
-  color: #E75480;
+/* --- Global Reset & Theme --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
 }
 
+body {
+    background-color: #fff5f8; /* Soft Blush White */
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Animations --- */
+@keyframes cardEntrance {
+    from { 
+        opacity: 0; 
+        transform: scale(0.9); 
+    }
+    to { 
+        opacity: 1; 
+        transform: scale(1); 
+    }
+}
+
+/* --- Header & Navigation --- */
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #E75480;
-  color: white;
-  padding: 15px 30px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 45px;
-  z-index: 10;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(255, 77, 148, 0.1);
+    border-bottom: 3px solid #ff4d94;
+    margin-bottom: 40px;
 }
 
 .logo h1 {
-    margin: 0;
-    font-size: 45px;
+    color: #ff4d94;
+    font-weight: 800;
 }
 
 nav ul {
     list-style: none;
-    margin: 0;
-    margin-right: 20px;
-    padding: 0;
-    padding-right: 25px;
-    display: flex;
-}
-
-nav ul li {
-    margin-right: 1px;
 }
 
 nav ul li a {
-  color: black;
-  text-decoration: none;
-  font-size: 18px;
-  padding: 10px 15px;
-  display: block;
-  border-radius: 10%;
-  border: 2px solid transparent;
-  background-color: white;
-  transition: color 0.3s ease, background-color 0.3s ease;
+    text-decoration: none;
+    color: #dc3545; /* Red for Logout */
+    font-weight: 600;
+    border: 1px solid #dc3545;
+    padding: 6px 15px;
+    border-radius: 20px;
+    transition: all 0.3s;
 }
 
 nav ul li a:hover {
-    color: white;
-    border-color: #FFFFFF;
-    background-color: black;
+    background: #dc3545;
+    color: #fff;
 }
 
-footer {
-  background-color: #E75480;
-  color: white;
-  text-align: center;
-  padding: 10px 0;
-
-  bottom: 0;
-  width: 100%;
-  height: 45px;
-  position:fixed;
-        margin-top: 100%;
-}
-
+/* --- Modules Grid Container --- */
 .buttons-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
-    width: 100%;
-    text-align: center;
-    margin-top: 100px;
-  }
-  
-  .button {
-    text-align: center;
-    background-color: black; /* Changed from white to black */
-    color: white; /* Make sure text is visible */
-    border-radius: 20px;
-    border: 3px solid white;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    max-width: 1100px;
+    margin: 0 auto;
     padding: 20px;
-    width: 250px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-  }
-  
-  .button img {
-    width: 130px;
-    height: 130px;
-    border-radius: 80%;
-    margin-bottom: 15px;
-  }
-  
-  .button-link {
-    display: block;
-    font-size: 18px;
-    color: black;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 10px 20px;
-    background-color: lightgreen;
-    border-radius: 12px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-  }
-  
-  .button:hover {
-    background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA9jZRoz1H_kyrkqhLf5-Y_8tYEfXAZscoZw&s);
+    flex: 1;
+}
+
+/* --- Individual Module Cards --- */
+.button {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #eee;
+    animation: cardEntrance 0.6s ease-out;
+}
+
+.button:hover {
     transform: translateY(-10px);
-    box-shadow: 0 12px 16px rgba(0, 0, 0, 0.6);
-  }
-  
-  .button-link:hover {
-  background-color: rgb(64, 161, 64);
-  color: white;
-  transform: scale(1.05);
+    box-shadow: 0 15px 30px rgba(255, 77, 148, 0.15);
+    border-color: #ff4d94;
+}
+
+.button img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    margin-bottom: 20px;
+    border-radius: 12px;
+}
+
+/* --- Card Links (Styled as Buttons) --- */
+.button-link {
+    text-decoration: none;
+    color: #fff;
+    background-color: #ff4d94;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 0.95rem;
+    width: 100%;
+    transition: background 0.3s;
+}
+
+.button-link:hover {
+    background-color: #ff1a75;
+}
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #888;
+    background: #fff;
+    border-top: 1px solid #eee;
+    margin-top: 40px;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 600px) {
+    .buttons-container {
+        grid-template-columns: 1fr;
+    }
 }

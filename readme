@@ -1,13 +1,42 @@
-#WellNest
+WellNest - Women’s Safety & Well-being Platform
+WellNest is a dedicated digital ecosystem designed to empower women by providing a safe, supportive space for mental health support, legal awareness, and emergency resources. The platform features a unique dual-interface: a "Cyber-Noir" dark theme for administrative tasks and a soft, empathetic "Blush" theme for users.
 
-1. Start with Index.html
+🌟 Features
+👩‍💻 User Portal (The Blush Suite)
+Legal Awareness (Know Your Rights): An interactive grid of key Indian laws protecting women, with detailed modal pop-ups for each Act.
 
-2.Choose the page you wanted to go.
+Virtual Counseling: A specialized booking system to schedule sessions with licensed professionals.
 
-3.For admin, the username is "admin" and password is "adminpasswd"
+Video Consultations: Integrated video conferencing via Jitsi Meet for secure, private sessions.
 
-To install dependecies:
-npm install express cors mongoose dotenv bcrypt
+Emergency Helplines: A mobile-responsive directory of Coimbatore-specific and National helplines for immediate assistance.
 
-To run server:
-node server.js
+Feedback System: Post-meeting surveys to ensure service quality and user satisfaction.
+
+🩺 Counsellor Portal
+Slot Management: Tools for counsellors to create and manage their availability.
+
+Booking Overview: A dashboard to view upcoming appointments and launch virtual meeting rooms.
+
+🔐 Admin Portal (The Cyber-Noir Suite)
+Counsellor Management: Securely add or remove licensed counsellors from the platform.
+
+User Oversight: View and manage registered users to maintain platform integrity.
+
+Secure Authentication: Role-based access control for Admins, Counsellors, and Users.
+
+🎨 Design Philosophy
+Admin/Counsellor Side: High-contrast Black & Neon Pink theme for a professional, focused, and "tech-forward" feel.
+
+User Side: Inverted Blush White & Soft Pink theme to provide a calming, welcoming, and empathetic user experience.
+
+Animations: Smooth transitions using CSS Keyframes (Fade-ins, Scale-pops, and Hover-glows) across the entire platform.
+
+🛠️ Tech Stack
+Frontend: HTML5, CSS3 (Modern Flexbox/Grid), JavaScript (ES6+).
+
+Communication: EmailJS for automated booking confirmations.
+
+Video: Jitsi Meet API for secure video conferencing.
+
+Backend Support: Node.js/Express (Expected for full functionality) with a RESTful API structure.

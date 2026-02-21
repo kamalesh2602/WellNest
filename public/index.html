@@ -1,93 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WellNest</title>
-    <style>
-        body {
-            background-color: #000;
-            /* Black background */
-            color: #fff;
-            /* White text */
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Header Styling */
-        header {
-            padding: 20px;
-            background-color: #ff4d6d;
-            /* Strong Pink */
-            text-align: center;
-        }
-
-        header h1 {
-            font-size: 48px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        /* Centering the Boxes */
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            /* ✅ Centers items horizontally */
-            justify-content: center;
-            /* ✅ Centers items vertically */
-            height: 80vh;
-            /* Ensures full-page centering */
-        }
-
-
-        /* Navigation Boxes */
-        a {
-            display: block;
-            width: 250px;
-            padding: 15px;
-            margin: 15px;
-            font-size: 20px;
-            text-decoration: none;
-            color: white;
-            background-color: #333;
-            /* Dark grey boxes */
-            border: 3px solid #ff4d6d;
-            /* Pink border */
-            border-radius: 10px;
-            text-align: center;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        a {
-            text-align: center;
-            width: 250px;
-            margin: 15px auto;
-            /* ✅ Auto margins center the boxes */
-        }
-
-        /* Hover Effect */
-        a:hover {
-            background-color: #ff4d6d;
-            /* Pink highlight */
-            color: black;
-            transform: scale(1.1);
-        }
-    </style>
-</head>
-
+    <title>WellNest | Welcome</title>
+    <link rel="stylesheet" href="index.css"> </head>
 <body>
+
     <header>
         <h1>WellNest</h1>
     </header>
-    <a href="admin/admin.html">ADMIN</a>
-    <a href="counsellor/clogin.html">COUNSELLOR</a>
-    <a href="user/home.html">USER</a>
-</body>
 
+    <div class="container">
+        <a href="admin/admin.html" class="portal-link">ADMIN PORTAL</a>
+        <a href="counsellor/clogin.html" class="portal-link">COUNSELLOR PORTAL</a>
+        <a href="user/home.html" class="portal-link">USER PORTAL</a>
+    </div>
+
+    <footer>
+        &copy; 2025 WellNest - Safety & Well-being
+    </footer>
+
+</body>
 </html>

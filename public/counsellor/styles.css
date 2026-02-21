@@ -1,177 +1,198 @@
-/* Global Styles */
+/* --- Global Reset & Theme --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
 body {
-  margin: 0;
-  padding-top: 80px;
-  background-image: url("../assets/bg2.jpg");
-  background-size: cover;
-  background-position: center;
-  color: #E75480;
-  text-align: center;
+    background-color: #0d0d0d;
+    color: #e0e0e0;
+    min-height: 100vh;
+    padding: 20px;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Header */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #E75480;
-  color: white;
-  padding: 15px 30px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 45px;
-  z-index: 10;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+/* --- Animations --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-.logo h1 {
-  margin: 0;
-  font-size: 45px;
+@keyframes pulseBorder {
+    0% { border-color: #333; }
+    50% { border-color: #ff4d94; }
+    100% { border-color: #333; }
 }
 
-/* Navigation (if used) */
-nav ul {
-  list-style: none;
-  margin: 0;
-  margin-right: 20px;
-  padding: 0;
-  padding-right: 25px;
-  display: flex;
-}
-
-nav ul li {
-  margin-right: 1px;
-}
-
-nav ul li a {
-  color: black;
-  text-decoration: none;
-  font-size: 18px;
-  padding: 10px 15px;
-  display: block;
-  border-radius: 10%;
-  border: 2px solid transparent;
-  background-color: white;
-  transition: color 0.3s ease, background-color 0.3s ease;
-}
-
-nav ul li a:hover {
-  color: white;
-  border-color: #FFFFFF;
-  background-color: black;
-}
-
-/* Main Container Styling */
-
-
+/* --- Layout Components --- */
 .container {
-  background-color: black;
-  color: white;
-  border-radius: 20px;
-  border: 3px solid white;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-  padding: 25px;
-  margin: 30px auto; /* Centered horizontally */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  max-width: 600px; /* ✅ Limit width */
-}
-.container:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 12px 16px rgba(0, 0, 0, 0.6);
-  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA9jZRoz1H_kyrkqhLf5-Y_8tYEfXAZscoZw&s);
+    max-width: 800px;
+    margin: 40px auto;
+    width: 90%;
+    animation: fadeIn 0.6s ease-out;
 }
 
-
-
-/* Section Links */
-.c2 {
-  display: inline-block;
-  font-size: 18px;
-  color: black;
-  text-decoration: none;
-  font-weight: bold;
-  padding: 10px 20px;
-  background-color: lightgreen;
-  border-radius: 12px;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  margin-top: 15px;
+header {
+    width: 100%;
+    padding: 15px 30px;
+    background: #161616;
+    border-bottom: 2px solid #ff4d94;
+    margin-bottom: 30px;
 }
 
-.c2:hover {
-   background-color: rgb(64, 161, 64);
-  color: white;
-  transform: scale(1.05);
+/* --- Dashboard Modules (Grid) --- */
+.modules {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
 }
 
-/* User / Counsellor Cards */
-.card {
-  background: white;
-  border-radius: 10px;
-  padding: 20px;
-  margin: 15px 0;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  text-align: left;
+.modules:hover {
+    border-color: #ff4d94;
+    box-shadow: 0 0 20px rgba(255, 77, 148, 0.15);
 }
 
-.card h3 {
-  color: #E75480;
-  margin-bottom: 10px;
+/* --- Links & Buttons --- */
+.c2, .btn, .section-box-link {
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    background: #ff4d94;
+    padding: 10px 25px;
+    border-radius: 6px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    text-transform: uppercase;
+    font-size: 14px;
 }
 
-.card p {
-  margin: 5px 0;
-  font-size: 15px;
+.c2:hover, .btn:hover {
+    background: #ff1a75;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 77, 148, 0.4);
 }
 
-/* Delete Button */
-.delete-btn {
-  background-color: #E75480;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  font-size: 16px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 10px;
+/* Back button specific */
+a.c2[href="cdashboard.html"] {
+    background: transparent;
+    border: 1px solid #ff4d94;
+    color: #ff4d94;
+    margin-bottom: 20px;
 }
 
-.delete-btn:hover {
-  background-color: #ff8ab8;
+/* --- Forms & Inputs --- */
+form {
+    background: #1a1a1a;
+    padding: 30px;
+    border-radius: 15px;
+    border: 1px solid #222;
 }
 
-/* Footer */
+h2 {
+    color: #ff4d94;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.form-group, .ips, .slot-row {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.slot-row {
+    flex-direction: row;
+    gap: 15px;
+}
+
+label {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #bbb;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="time"] {
+    padding: 12px;
+    background: #252525;
+    border: 1px solid #333;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 16px;
+    width: 100%;
+}
+
+input:focus {
+    outline: none;
+    border-color: #ff4d94;
+    box-shadow: 0 0 5px rgba(255, 77, 148, 0.3);
+}
+
+/* --- Booking Cards --- */
+#bookingList {
+    list-style: none;
+    padding: 0;
+}
+
+.booking-card {
+    background: #1a1a1a !important; /* Override inline white */
+    border: 1px solid #333 !important;
+    padding: 20px !important;
+    margin-bottom: 20px !important;
+    border-radius: 12px !important;
+    transition: 0.3s;
+    animation: fadeIn 0.4s ease-out;
+}
+
+.booking-card:hover {
+    border-color: #ff4d94 !important;
+}
+
+.client-name {
+    color: #ff4d94 !important; /* Neon Pink Names */
+    font-size: 1.2rem !important;
+}
+
+.booking-date {
+    color: #888 !important;
+}
+
+.booking-details p {
+    color: #ccc !important;
+    border-left: 2px solid #ff4d94;
+    padding-left: 10px;
+    margin: 10px 0;
+}
+
+.booking-details a {
+    color: #00d4ff; /* Tech blue for meeting links */
+    text-decoration: none;
+}
+
+/* --- Footer --- */
 footer {
-  background-color: #E75480;
-  color: white;
-  text-align: center;
-  padding: 10px 0;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  height: 45px;
+    margin-top: auto;
+    text-align: center;
+    padding: 40px 0;
+    color: #444;
 }
 
-.ips {
-  margin-bottom: 20px; /* Adds spacing between input fields */
-}
-
-input {
-  width: 80%;
-  padding: 12px 15px;
-  font-size: 16px;
-  border: 2px solid #E75480;
-  border-radius: 8px;
-  box-sizing: border-box;
-}
-
-.form-group{
-    margin-bottom: 20px; /* Adds spacing between input fields */
-    
-}
-
-
-.form-group input{
-        width: 250px;
+/* --- Media Queries --- */
+@media (max-width: 600px) {
+    .slot-row {
+        flex-direction: column;
     }
+}

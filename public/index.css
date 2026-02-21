@@ -1,0 +1,89 @@
+/* --- Global Reset --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+    background-color: #0a0a0a; /* Deep Black */
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* --- Animations --- */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Header Styling --- */
+header {
+    padding: 60px 20px;
+    background: linear-gradient(180deg, #ff4d6d 0%, #0a0a0a 100%);
+    text-align: center;
+    animation: fadeInDown 0.8s ease-out;
+}
+
+header h1 {
+    font-size: 64px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(255, 77, 109, 0.6);
+}
+
+/* --- Centering the Navigation --- */
+.container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    animation: slideInUp 1s ease-out;
+}
+
+/* --- Navigation Boxes --- */
+.portal-link {
+    display: block;
+    width: 300px;
+    padding: 20px;
+    font-size: 22px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #1a1a1a; /* Dark grey */
+    border: 2px solid #ff4d6d;
+    border-radius: 50px; /* Rounded pill shape */
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 2px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 15px rgba(255, 77, 109, 0.2);
+}
+
+/* --- Hover Effects --- */
+.portal-link:hover {
+    background-color: #ff4d6d;
+    color: #000;
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(255, 77, 109, 0.8);
+}
+
+/* --- Footer logic for index --- */
+footer {
+    padding: 20px;
+    text-align: center;
+    color: #444;
+    font-size: 14px;
+}

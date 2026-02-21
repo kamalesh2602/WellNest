@@ -1,58 +1,110 @@
+/* --- Global Reset & Theme --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
 body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  text-align: center;
-  font-family: Arial, sans-serif;
-  padding: 30px;
-  background-color: black;
-  color: white
+    background-color: #fff5f8; /* Soft Blush White */
+    color: #333;
+    padding: 20px;
+    text-align: center;
+    min-height: 100vh;
 }
 
+/* --- Navigation & Feedback Bar --- */
+.feedback {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(255, 77, 148, 0.1);
+    margin-bottom: 30px;
+    border-left: 5px solid #ff4d94;
+}
+
+.feedback a {
+    color: #ff4d94;
+    text-decoration: none;
+    font-weight: 600;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+.feedback a:hover {
+    color: #333;
+}
+
+/* --- Meeting Headers --- */
 h2 {
-  margin-bottom: 20px;
+    color: #ff4d94;
+    font-size: 2rem;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-#meeting-info,
+#meeting-info {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
 #time-message {
-  margin-bottom: 15px;
+    font-weight: bold;
+    color: #ff1a75;
+    margin-bottom: 20px;
 }
 
+/* --- The Join Button --- */
 #join-btn {
-  margin-top: 15px;
-  padding: 10px 20px;
-  background-color: #E75480;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+    background-color: #ff4d94;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(255, 77, 148, 0.3);
+    margin-bottom: 30px;
 }
 
 #join-btn:disabled {
-  background-color: grey;
-  cursor: not-allowed;
+    background-color: #cccccc;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: scale(1);
 }
 
+#join-btn:not(:disabled):hover {
+    background-color: #ff1a75;
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(255, 77, 148, 0.4);
+}
+
+/* --- Video Container --- */
 #meet {
-  margin-top: 30px;
-  width: 80%;
-  height: 500px;
-  max-width: 1000px;
+    width: 90%;
+    max-width: 1000px;
+    height: 600px;
+    margin: 0 auto;
+    background: #000; /* Black background for the video area */
+    border-radius: 15px;
+    overflow: hidden;
+    border: 3px solid #ff4d94;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
-.feedback {
-  width: 100%;
-  display: flex;
-  align-items: right;
-  justify-content: right;
-  gap: 20px;
-  a {
-    color: whitesmoke;
-  }
+/* --- Animations --- */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
 
-  a:hover {
-    color: pink;
-  }
+#time-message:not(:empty) {
+    animation: pulse 2s infinite ease-in-out;
 }
