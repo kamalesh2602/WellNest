@@ -27,7 +27,7 @@ async function loadConfig() {
 
 
 function fetchSlots() {
-    fetch('/getslots')
+    fetch('https://wellnest-2ymx.onrender.com/getslots')
         .then(response => response.json())
         .then(slots => {
             displaySlots(slots);
@@ -101,7 +101,7 @@ function bookSlot(slot) {
         slotId: slot._id
     };
 
-    fetch('/bookslot', {
+    fetch('https://wellnest-2ymx.onrender.com/bookslot', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

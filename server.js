@@ -10,7 +10,13 @@ const bcrypt = require('bcrypt');
 const app = express();
 app.use(express.json());
 app.use(express.static('public'));
-app.use(cors());
+const cors = require("cors");
+
+app.use(cors({
+  origin: "https://wellnestadl.netlify.app",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 
 app.get('/config', (req, res) => {
   res.json({

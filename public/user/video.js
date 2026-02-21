@@ -20,7 +20,7 @@ let api;
 // 🔥 Load config from backend
 async function loadConfig() {
   try {
-    const res = await fetch('/config');
+    const res = await fetch('https://wellnest-2ymx.onrender.com/config');
     const config = await res.json();
 
     EMAILJS_SERVICE_ID = config.EMAILJS_SERVICE_ID;
@@ -35,7 +35,7 @@ async function loadConfig() {
 
 async function fetchBookings() {
   try {
-    const res = await fetch(`/getbookings?userId=${userId}`);
+    const res = await fetch(`https://wellnest-2ymx.onrender.com/getbookings?userId=${userId}`);
     const bookings = await res.json();
 
     if (bookings.length === 0) {
@@ -76,7 +76,7 @@ function checkMeetingStart() {
 
     const meetingLink = `https://${JITSI_DOMAIN}/WellNest-${activeBooking._id}`;
 
-    fetch('/send-meeting-link', {
+    fetch('https://wellnest-2ymx.onrender.com/send-meeting-link', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ bookingId: activeBooking._id })

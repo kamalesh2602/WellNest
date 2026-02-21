@@ -72,7 +72,7 @@
 <script>
     async function fetchCounsellors() {
         try {
-            const response = await fetch('/admin/counsellors');
+            const response = await fetch('https://wellnest-2ymx.onrender.com/admin/counsellors');
             const data = await response.json();
             const tbody = document.querySelector('#counsellorTable tbody');
             tbody.innerHTML = '';
@@ -94,7 +94,7 @@
 
     async function deleteCounsellor(id) {
         try {
-            await fetch(`/admin/counsellors/${id}`, { method: 'DELETE' });
+            await fetch(`https://wellnest-2ymx.onrender.com/admin/counsellors/${id}`, { method: 'DELETE' });
             fetchCounsellors(); // Refresh list after deletion
         } catch (error) {
             console.error('Error deleting counsellor:', error);

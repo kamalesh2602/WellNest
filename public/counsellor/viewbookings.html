@@ -43,7 +43,7 @@
             try {
                 showLoading();
 
-                const response = await fetch(`/counsellor/getbookings?counsellorEmail=${counsellorEmail}`);
+                const response = await fetch(`https://wellnest-2ymx.onrender.com/counsellor/getbookings?counsellorEmail=${counsellorEmail}`);
 
                 if (!response.ok) {
                     throw new Error(`Server returned ${response.status}`);
