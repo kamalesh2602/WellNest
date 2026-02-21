@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 async function loadConfig() {
     try {
-        const res = await fetch('/config');
+        const res = await fetch('https://wellnest-2ymx.onrender.com/config');
         const config = await res.json();
 
         EMAILJS_SERVICE_ID = config.EMAILJS_SERVICE_ID;
