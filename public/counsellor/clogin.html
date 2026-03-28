@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WELLNEST- Counsellor</title>
     <link rel="stylesheet" href="styles.css">
-    
+
 </head>
+
 <body>
     <header>
         <div class="logo">
-          <a href="../index.html" style="
+            <a href="../index.html" style="
         float:right;
         padding:8px 15px;
         background:#dc3545;
@@ -20,74 +22,79 @@
         font-size:14px;
     ">Logout</a>
         </div>
-      </header>
-
-      
-        <h2>Log In to Your WellNest Account</h2>
-        <form id="login-form">
-
-            
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" id="email" name="email" required>
-            </div>
+    </header>
 
 
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit" id="submit" class="btn">Log In</button>
-        </form>
-    
+    <h2>Log In to Your WellNest Account</h2>
+    <form id="login-form">
+
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit" id="submit" class="btn">Log In</button>
+    </form>
+
 
     <footer>
+        <h3>
+            Wanted to be a WellNest Counsellor?
+            <a href="mailto:23z332@psgtech.ac.in">Contact 23z332@psgtech.ac.in</a>
+        </h3>
         <h3>&copy 2025 WellNest</h3>
-      </footer>
+    </footer>
 
-      <script>
-    const form = document.querySelector('#login-form');
-    const name = document.querySelector('#name');
-    const email = document.querySelector('#email');
-    const password = document.querySelector('#password');
+    <script>
+        const form = document.querySelector('#login-form');
+        const name = document.querySelector('#name');
+        const email = document.querySelector('#email');
+        const password = document.querySelector('#password');
 
-    form.addEventListener('submit', async function (e) {
-        e.preventDefault(); 
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
 
-        const formData = {
+            const formData = {
 
-            email: email.value.trim(),
-            password: password.value.trim()
-        };
+                email: email.value.trim(),
+                password: password.value.trim()
+            };
 
-        try {
-            const response = await fetch('https://wellnest-2ymx.onrender.com/counsellor/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
-            });
+            try {
+                const response = await fetch('https://wellnest-2ymx.onrender.com/counsellor/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
 
-            const data = await response.json();
+                const data = await response.json();
 
-            if (response.ok) {
-                alert(`Login successful! Welcome, ${data.user.name}`);
+                if (response.ok) {
+                    alert(`Login successful! Welcome, ${data.user.name}`);
 
-                localStorage.setItem('counsellorEmail', data.user.email);
-                localStorage.setItem('counsellorName', data.user.name);
-                localStorage.setItem('counsellorType', data.user.ctype);
-                
-                
-                window.location.href = "cdashboard.html";
-                
-            } else {
-                alert(`Error: ${data.message}`);
+                    localStorage.setItem('counsellorEmail', data.user.email);
+                    localStorage.setItem('counsellorName', data.user.name);
+                    localStorage.setItem('counsellorType', data.user.ctype);
+
+
+                    window.location.href = "cdashboard.html";
+
+                } else {
+                    alert(`Error: ${data.message}`);
+                }
+            } catch (error) {
+                alert(`Error submitting data: ${error.message}`);
             }
-        } catch (error) {
-            alert(`Error submitting data: ${error.message}`);
-        }
-    });
-</script>
+        });
+    </script>
 
-      
+
 </body>
+
 </html>
