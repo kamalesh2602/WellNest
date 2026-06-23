@@ -3,33 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WELLNEST- Counsellor</title>
-       <link rel="stylesheet" href="styles.css">
+    <title>WellNest | Counsellor Dashboard</title>
+    <link rel="stylesheet" href="../assets/css/counsellor.css">
     
+    <!-- Auth Guard -->
+    <script src="../assets/js/auth.js"></script>
+    <script>
+        AUTH.checkCounsellorAuth();
+    </script>
 </head>
 <body>
+    
     <header>
-        <div class="logo">
-          <a href="../index.html" style="
-        float:right;
-        padding:8px 15px;
-        background:#dc3545;
-        color:white;
-        text-decoration:none;
-        border-radius:5px;
-        font-size:14px;
-    ">Logout</a>
-        </div>
-      </header>
+        <h1>WellNest - Counsellor Dashboard</h1>
+        <nav>
+            <ul>
+                <li><button onclick="AUTH.logout()" class="btn btn-danger" style="padding: 6px 15px;">Logout</button></li>
+            </ul>
+        </nav>
+    </header>
 
-      <div class="container">
-        <div  class="modules" >
-            <a id="createslots" href="createslots.html" class="c2">Create Slots</a>
+    <main class="container">
+        <h2 style="text-align: left; margin-bottom: 30px; color: var(--primary-color);">Counsellor Portal</h2>
+        
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <span class="dashboard-icon">📆</span>
+                <h3>Create Availability Slots</h3>
+                <p>Add new consultation dates and times for clients to reserve appointments.</p>
+                <a href="createslots.html" class="btn btn-primary">Create Slots</a>
+            </div>
+            
+            <div class="dashboard-card">
+                <span class="dashboard-icon">💬</span>
+                <h3>View Booked Appointments</h3>
+                <p>Check scheduled consultations, client details, and launch Jitsi Meet video consults.</p>
+                <a href="viewbookings.html" class="btn btn-primary">View Bookings</a>
+            </div>
         </div>
-        <div class="modules">
-            <a id="viewbookings" href="viewbookings.html"class="c2">View Bookings</a>
-        </div>
-       
-    </div>
+    </main>
+
+    <footer>
+        &copy; 2025 WellNest - Safety & Well-being
+    </footer>
+
 </body>
 </html>

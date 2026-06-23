@@ -3,71 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bookings List</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>WellNest | Create Slots</title>
+    <link rel="stylesheet" href="../assets/css/counsellor.css">
+    
+    <!-- Scripts -->
+    <script src="../assets/js/config.js" defer></script>
+    <script src="../assets/js/api.js" defer></script>
+    <script src="../assets/js/auth.js" defer></script>
+    <script src="../assets/js/utilities.js" defer></script>
+    <script src="../assets/js/createslots.js" defer></script>
 </head>
 <body>
     
-    
-<a href="cdashboard.html" class="c2">Back to Dashboard</a>
-    <div class="container">
-    <h1>Add Slot</h1>
-    <form id="form-group">
-        <div class="slot-row">
-            <input type="date" name="slotdate" id="slotdate">
-            <input type="time" name="slottime" id="slottime">
-        </div>
-        <button type="submit" class="c2">Create Slot</button>
-    </form>
-</div>
+    <header>
+        <h1>WellNest - Counsellor</h1>
+        <nav>
+            <ul>
+                <li><button onclick="AUTH.logout()" class="btn btn-danger" style="padding: 6px 15px;">Logout</button></li>
+            </ul>
+        </nav>
+    </header>
 
+    <main class="container">
+        <a href="cdashboard.html" class="back-nav">← Back to Dashboard</a>
+        
+        <form id="createslots-form">
+            <h2>Add Availability Slot</h2>
+            
+            <div class="form-group">
+                <label for="slotdate">Consultation Date</label>
+                <input type="date" id="slotdate" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="slottime">Consultation Time</label>
+                <input type="time" id="slottime" required>
+            </div>
 
-    <script>
-    const form = document.querySelector('#form-group');
-    const slotDate = document.querySelector('#slotdate');
-    const slotTime = document.querySelector('#slottime');
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Create Slot</button>
+        </form>
+    </main>
 
-    form.addEventListener('submit', async function (e) {
-        e.preventDefault();
-
-        // Retrieve counsellor details from localStorage
-        const counsellorName = localStorage.getItem('counsellorName');
-        const counsellorEmail = localStorage.getItem('counsellorEmail');
-        const counsellorType = localStorage.getItem('counsellorType');
-
-        if (!counsellorName || !counsellorEmail) {
-            alert('Counsellor details missing. Please log in again.');
-            return;
-        }
-
-        const slotData = {
-            counsellorName,
-            counsellorEmail,
-            counsellorType,
-            slotDate: slotDate.value,
-            slotTime: slotTime.value
-        };
-
-        try {
-            const response = await fetch('https://wellnest-2ymx.onrender.com/counsellor/addslot', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(slotData)
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                alert(`Slot created successfully on ${slotData.slotDate} at ${slotData.slotTime}`);
-                form.reset();
-            } else {
-                alert(`Error: ${data.message}`);
-            }
-        } catch (error) {
-            alert(`Error submitting data: ${error.message}`);
-        }
-    });
-</script>
+    <footer>
+        &copy; 2025 WellNest - Safety & Well-being
+    </footer>
 
 </body>
 </html>

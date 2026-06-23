@@ -1,0 +1,100 @@
+@import url('global.css');
+
+body {
+    background: linear-gradient(135deg, #f4f7f6 0%, #e8f0ed 100%);
+    justify-content: space-between;
+    height: 100vh;
+}
+
+header {
+    background-color: transparent;
+    border-bottom: none;
+    box-shadow: none;
+    display: flex;
+    justify-content: center;
+    padding-top: 60px;
+    padding-bottom: 20px;
+}
+
+header h1 {
+    font-size: 42px;
+    letter-spacing: 2px;
+    font-weight: 800;
+}
+
+header h1::before {
+    font-size: 42px;
+}
+
+.welcome-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px;
+}
+
+.welcome-text {
+    text-align: center;
+    max-width: 500px;
+    margin-bottom: 10px;
+}
+
+.welcome-text h2 {
+    color: var(--primary-color);
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.welcome-text p {
+    color: var(--text-muted);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.portal-links {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 320px;
+}
+
+.portal-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 30px;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: var(--primary-color);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 1px solid transparent;
+}
+
+.portal-link:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.portal-link-alt {
+    background-color: var(--card-bg);
+    color: var(--primary-color);
+    border: 1.5px solid var(--primary-color);
+}
+
+.portal-link-alt:hover {
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}

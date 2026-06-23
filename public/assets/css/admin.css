@@ -1,0 +1,105 @@
+@import url('global.css');
+
+/* --- Dashboard Grid Layout --- */
+.admin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-top: 30px;
+}
+
+.admin-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--border-color);
+    padding: 30px;
+    text-align: center;
+    box-shadow: var(--shadow-md);
+    transition: all 0.25s ease;
+}
+
+.admin-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-color);
+    box-shadow: var(--shadow-lg);
+}
+
+.admin-card-icon {
+    font-size: 40px;
+    display: block;
+    margin-bottom: 16px;
+}
+
+.admin-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 12px;
+}
+
+.admin-card p {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* --- Table Styles --- */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-md);
+    margin-top: 25px;
+    padding: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+th, td {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+th {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--primary-color);
+}
+
+td {
+    font-size: 15px;
+    color: var(--text-main);
+}
+
+tr:hover td {
+    background-color: var(--primary-light);
+}
+
+/* --- Navigation back button --- */
+.back-nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 20px;
+    transition: transform 0.2s ease;
+}
+
+.back-nav:hover {
+    transform: translateX(-3px);
+}

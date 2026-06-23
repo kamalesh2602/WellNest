@@ -3,31 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WellNest - Admin Login</title>
-    <link rel="stylesheet" href="admin.css">
+    <title>WellNest | Admin Login</title>
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    
+    <!-- Central scripts -->
+    <script src="../assets/js/config.js" defer></script>
+    <script src="../assets/js/api.js" defer></script>
+    <script src="../assets/js/auth.js" defer></script>
+    <script src="../assets/js/utilities.js" defer></script>
+    <script src="../assets/js/admin.js" defer></script>
 </head>
 <body>
     
     <header>
         <h1>WellNest - Admin</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+            </ul>
+        </nav>
     </header>
-    <div class="login-container">
-        <input type="text" id="admin" placeholder="Enter Admin Username" class="login-input">
-        <input type="password" id="adminpasswd" placeholder="Enter Admin Password" class="login-input">
-        <button type="submit" onclick="login()" class="login-button">Log In</button>
-    </div>
 
-    <script>
-        function login() {
-            const admin = document.getElementById('admin').value;
-            const adminpasswd = document.getElementById('adminpasswd').value;
+    <main class="container">
+        <form id="admin-login-form">
+            <h2>Log In as Administrator</h2>
+            
+            <div class="form-group">
+                <label for="adminpasswd">Admin Secret Password</label>
+                <input type="password" id="adminpasswd" placeholder="Enter Admin Secret Key" required autocomplete="current-password">
+            </div>
 
-            if (admin === 'admin' && adminpasswd === 'adminpasswd') {
-                window.location.href = 'admindashboard.html';
-            } else {
-                alert('Invalid Credentials');
-            }
-        }
-    </script>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Verify & Log In</button>
+        </form>
+    </main>
+
+    <footer>
+        &copy; 2025 WellNest - Safety & Well-being
+    </footer>
+
 </body>
 </html>

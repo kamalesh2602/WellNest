@@ -1,52 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WellNest - Admin</title>
-    <link rel="stylesheet" href="addcounsellors.css">
-    <script src="addcounsellors.js" defer></script>
+    <title>WellNest | Add Counsellor</title>
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    
+    <!-- Scripts -->
+    <script src="../assets/js/config.js" defer></script>
+    <script src="../assets/js/api.js" defer></script>
+    <script src="../assets/js/auth.js" defer></script>
+    <script src="../assets/js/utilities.js" defer></script>
+    <script src="../assets/js/addcounsellors.js" defer></script>
 </head>
-
 <body>
+
     <header>
-    <h1>WellNest - Admin</h1>
-    <a href="./admindashboard.html" style="
-        float:right;
-        padding:8px 15px;
-        background:#dc3545;
-        color:white;
-        text-decoration:none;
-        border-radius:5px;
-        font-size:14px;
-    ">Logout</a>
-</header>
-    <a href="admindashboard.html" class="section-box-link">Back to Dashboard</a>
-    <form id="form" method="post">
-        <h1>Add Counsellor</h1>
-        <div class="ips">
+        <h1>WellNest - Admin</h1>
+        <nav>
+            <ul>
+                <li><button onclick="AUTH.logout()" class="btn btn-danger" style="padding: 6px 15px;">Logout</button></li>
+            </ul>
+        </nav>
+    </header>
 
-            <input type="text" name="cname" id="cname" placeholder="Enter Counsellor Name">
-        </div>
-        <div class="ips">
+    <main class="container">
+        <a href="admindashboard.html" class="back-nav">← Back to Dashboard</a>
+        
+        <form id="add-counsellor-form">
+            <h2>Register New Counsellor</h2>
+            
+            <div class="form-group">
+                <label for="cname">Counsellor Name</label>
+                <input type="text" id="cname" placeholder="Enter Full Name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="cemail">Email Address</label>
+                <input type="email" id="cemail" placeholder="Enter Email Address" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="ctype">Specialization Type</label>
+                <select id="ctype" required>
+                    <option value="" disabled selected>Select Specialization</option>
+                    <option value="Mental Health">Mental Health Specialist</option>
+                    <option value="Legal Advisor">Legal Advisor</option>
+                    <option value="Family Therapist">Family Therapist</option>
+                    <option value="General Support">General Support Counsellor</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="cpassword">Temporary Password</label>
+                <input type="password" id="cpassword" placeholder="Enter Temporary Password" required>
+            </div>
 
-            <input type="email" name="cemail" id="cemail" placeholder="Enter Counsellor Email">
-        </div>
-        <div class="ips">
-
-            <input type="text" name="ctype" id="ctype" placeholder="Enter Counsellor Type">
-        </div>
-        <div class="ips">
-
-            <input type="text" name="cpassword" id="cpassword" placeholder="Enter Counsellor Password">
-        </div>
-        <button type="submit" class="section-box-link">Add Counsellor</button>
-    </form>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Add Counsellor</button>
+        </form>
+    </main>
 
     <footer>
-        &copy; 2025 - WellNest
+        &copy; 2025 WellNest - Safety & Well-being
     </footer>
-</body>
 
+</body>
 </html>

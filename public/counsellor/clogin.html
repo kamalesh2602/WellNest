@@ -1,100 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WELLNEST- Counsellor</title>
-    <link rel="stylesheet" href="styles.css">
-
+    <title>WellNest | Counsellor Login</title>
+    <link rel="stylesheet" href="../assets/css/counsellor.css">
+    
+    <!-- Scripts -->
+    <script src="../assets/js/config.js" defer></script>
+    <script src="../assets/js/api.js" defer></script>
+    <script src="../assets/js/auth.js" defer></script>
+    <script src="../assets/js/utilities.js" defer></script>
+    <script src="../assets/js/clogin.js" defer></script>
 </head>
-
 <body>
+    
     <header>
-        <div class="logo">
-            <a href="../index.html" style="
-        float:right;
-        padding:8px 15px;
-        background:#dc3545;
-        color:white;
-        text-decoration:none;
-        border-radius:5px;
-        font-size:14px;
-    ">Logout</a>
-        </div>
+        <h1>WellNest</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+            </ul>
+        </nav>
     </header>
 
+    <main class="container">
+        <form id="counsellor-login-form">
+            <h2>Counsellor Portal Log In</h2>
+            
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="Enter Registered Email" required autocomplete="email">
+            </div>
 
-    <h2>Log In to Your WellNest Account</h2>
-    <form id="login-form">
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter Password" required autocomplete="current-password">
+            </div>
 
-
-        <div class="form-group">
-            <label>Email</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-
-
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <button type="submit" id="submit" class="btn">Log In</button>
-    </form>
-
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Verify & Log In</button>
+        </form>
+    </main>
 
     <footer>
-        <h3>
-            Wanted to be a WellNest Counsellor?
-            <a href="mailto:23z332@psgtech.ac.in">Contact 23z332@psgtech.ac.in</a>
-        </h3>
-        <h3>&copy 2025 WellNest</h3>
+        <h3>Wanted to be a WellNest Counsellor? <a href="mailto:23z332@psgtech.ac.in" style="color: var(--primary-color);">Contact Support</a></h3>
+        <p>&copy; 2025 WellNest - Safety & Well-being</p>
     </footer>
 
-    <script>
-        const form = document.querySelector('#login-form');
-        const name = document.querySelector('#name');
-        const email = document.querySelector('#email');
-        const password = document.querySelector('#password');
-
-        form.addEventListener('submit', async function (e) {
-            e.preventDefault();
-
-            const formData = {
-
-                email: email.value.trim(),
-                password: password.value.trim()
-            };
-
-            try {
-                const response = await fetch('https://wellnest-2ymx.onrender.com/counsellor/login', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(formData)
-                });
-
-                const data = await response.json();
-
-                if (response.ok) {
-                    alert(`Login successful! Welcome, ${data.user.name}`);
-
-                    localStorage.setItem('counsellorEmail', data.user.email);
-                    localStorage.setItem('counsellorName', data.user.name);
-                    localStorage.setItem('counsellorType', data.user.ctype);
-
-
-                    window.location.href = "cdashboard.html";
-
-                } else {
-                    alert(`Error: ${data.message}`);
-                }
-            } catch (error) {
-                alert(`Error submitting data: ${error.message}`);
-            }
-        });
-    </script>
-
-
 </body>
-
 </html>

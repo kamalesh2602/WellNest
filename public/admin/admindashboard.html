@@ -3,30 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - WellNest</title>
-    <link rel="stylesheet" href="styles.css">
-
+    <title>WellNest | Admin Dashboard</title>
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    
+    <!-- Auth Guard script -->
+    <script src="../assets/js/auth.js"></script>
+    <script>
+        // Check authentication immediately
+        AUTH.checkAdminAuth();
+    </script>
 </head>
 <body>
-    <a href="./admin.html" style="
-        float:right;
-        padding:8px 15px;
-        background:#dc3545;
-        color:white;
-        text-decoration:none;
-        border-radius:5px;
-        font-size:14px;
-    ">Logout</a>
-    <div class="admin-container">
-        <div  class="section-box" >
-            <a id="addcounsellors" href="addcounsellors.html" class="section-box-link">Add Counsellors</a>
+    
+    <header>
+        <h1>WellNest - Admin Dashboard</h1>
+        <nav>
+            <ul>
+                <li><button onclick="AUTH.logout()" class="btn btn-danger" style="padding: 6px 15px;">Logout</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2 style="text-align: left; margin-bottom: 30px; color: var(--primary-color);">Welcome, Administrator</h2>
+        
+        <div class="admin-grid">
+            <div class="admin-card">
+                <span class="admin-card-icon">👨‍⚕️</span>
+                <h3>Add Counsellors</h3>
+                <p>Register new mental health or legal professionals into the system.</p>
+                <a href="addcounsellors.html" class="btn btn-primary">Add Counsellor</a>
+            </div>
+            
+            <div class="admin-card">
+                <span class="admin-card-icon">👥</span>
+                <h3>View Counsellors</h3>
+                <p>Manage, monitor, and remove counsellor profiles from the database.</p>
+                <a href="viewcounsellors.html" class="btn btn-primary">Manage Counsellors</a>
+            </div>
+
+            <div class="admin-card">
+                <span class="admin-card-icon">👤</span>
+                <h3>View Users</h3>
+                <p>Monitor user registration and manage user accounts securely.</p>
+                <a href="viewusers.html" class="btn btn-primary">Manage Users</a>
+            </div>
         </div>
-        <div class="section-box">
-            <a id="viewusers" href="viewusers.html" class="section-box-link">View Users</a>
-        </div>
-        <div class="section-box">
-            <a id="viewcounsellors" href="viewcounsellors.html" class="section-box-link">View Counsellors</a>
-        </div>
-    </div>
+    </main>
+
+    <footer>
+        &copy; 2025 WellNest - Safety & Well-being
+    </footer>
+
 </body>
 </html>
