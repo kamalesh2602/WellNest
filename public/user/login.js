@@ -1,36 +1,29 @@
+/**
+ * user/login.js
+ * Uses the centralized API object — no hardcoded URLs.
+ */
+
 const form = document.querySelector('#login-form');
 const nameemail = document.querySelector('#nameemail');
 const password = document.querySelector('#password');
 
 form.addEventListener('submit', async function (e) {
-    e.preventDefault(); 
+    e.preventDefault();
 
     const formData = {
-        nameemail: nameemail.value.trim(), // Now supports both email and name
+        nameemail: nameemail.value.trim(),
         password: password.value.trim()
     };
 
     try {
-        const response = await fetch('https://wellnest-2ymx.onrender.com/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData)
-        });
+        const data = await API.loginUser(formData.nameemail, formData.password);
 
-        const data = await response.json();
+        alert(`Login successful! Welcome, ${data.user.name}`);
+        localStorage.setItem('userId', data.user.id);
+        localStorage.setItem('userName', data.user.name);
+        window.location.href = 'modules.html';
 
-        if (response.ok) {
-            alert(`Login successful! Welcome, ${data.user.name}`);
-
-            localStorage.setItem('userId', data.user.id);
-            localStorage.setItem('userName', data.user.name);
-            
-            window.location.href = "modules.html";
-            
-        } else {
-            alert(`Error: ${data.message}`);
-        }
     } catch (error) {
-        alert(`Error submitting data: ${error.message}`);
+        alert(`Error: ${error.message}`);
     }
 });

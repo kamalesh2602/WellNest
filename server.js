@@ -1,3 +1,4 @@
+console.log("SERVER FILE LOADED");
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
@@ -11,6 +12,8 @@ const generalRoutes = require('./routes/general');
 
 const app = express();
 
+
+console.log('ADMIN_SECRET =', process.env.ADMIN_SECRET);
 // Connect to Database
 connectDB();
 

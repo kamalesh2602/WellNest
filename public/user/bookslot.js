@@ -1,37 +1,18 @@
-// ================= DYNAMIC CONFIG =================
-let EMAILJS_SERVICE_ID;
-let EMAILJS_TEMPLATE_BOOKING_ID; // booking template
-let EMAILJS_PUBLIC_KEY;
-// ==================================================
+/**
+ * user/bookslot.js
+ * Uses the centralized API object and CONFIG for EmailJS keys.
+ * No hardcoded URLs anywhere.
+ */
 
-
-document.addEventListener('DOMContentLoaded', async function () {
-    await loadConfig();
+document.addEventListener('DOMContentLoaded', function () {
     fetchSlots();
 });
 
 
-async function loadConfig() {
-    try {
-        const res = await fetch('https://wellnest-2ymx.onrender.com/config');
-        const config = await res.json();
-
-        EMAILJS_SERVICE_ID = config.EMAILJS_SERVICE_ID;
-        EMAILJS_TEMPLATE_BOOKING_ID = config.EMAILJS_TEMPLATE_ID;
-        EMAILJS_PUBLIC_KEY = config.EMAILJS_PUBLIC_KEY;
-
-    } catch (err) {
-        console.error("Failed to load config:", err);
-    }
-}
-
 
 function fetchSlots() {
-    fetch('https://wellnest-2ymx.onrender.com/getslots')
-        .then(response => response.json())
-        .then(slots => {
-            displaySlots(slots);
-        })
+    API.getSlots()
+        .then(slots => displaySlots(slots))
         .catch(error => {
             console.error('Error fetching slots:', error);
             alert('Failed to load available slots. Please try again later.');
@@ -62,7 +43,7 @@ function displaySlots(slots) {
         const counsellorInfo = document.createElement('div');
         counsellorInfo.innerHTML = `
             <h3>${slot.counsellorName}</h3>
-            <h3>Counsellor Type :${slot.counsellorType}</h3>
+            <h3>Counsellor Type: ${slot.counsellorType}</h3>
             <p>Date: ${slot.slotDate}</p>
             <p>Time: ${slot.slotTime}</p>
         `;
@@ -82,17 +63,17 @@ function displaySlots(slots) {
 
 
 function bookSlot(slot) {
-    const userId = localStorage.getItem("userId");
-    const userName = localStorage.getItem("userName");
+    const userId = localStorage.getItem('userId');
+    const userName = localStorage.getItem('userName');
 
     if (!userId || !userName) {
-        alert('Booking cancelled. User information is required.');
+        alert('Booking cancelled. User information is required. Please log in again.');
         return;
     }
 
     const bookingData = {
-        userId: userId,
-        userName: userName,
+        userId,
+        userName,
         counsellorName: slot.counsellorName,
         counsellorEmail: slot.counsellorEmail,
         counsellorType: slot.counsellorType,
@@ -101,32 +82,24 @@ function bookSlot(slot) {
         slotId: slot._id
     };
 
-    fetch('https://wellnest-2ymx.onrender.com/bookslot', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(bookingData)
-    })
-        .then(response => response.json())
+    API.bookSlot(bookingData)
         .then(data => {
             if (data.message === 'Booking successful!') {
                 sendConfirmationEmail(bookingData);
                 alert('Booking successful!');
-                window.location.href = "video.html";
+                window.location.href = 'video.html';
             } else {
                 throw new Error(data.message || 'Booking failed');
             }
         })
         .catch(error => {
             console.error('Error booking slot:', error);
-            alert('Booking failed. Please try again.');
+            alert(`Booking failed: ${error.message}`);
         });
 }
 
 
 function sendConfirmationEmail(bookingData) {
-
     const templateParams = {
         userName: bookingData.userName,
         counsellorEmail: bookingData.counsellorEmail,
@@ -136,10 +109,10 @@ function sendConfirmationEmail(bookingData) {
     };
 
     emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_BOOKING_ID,
+        CONFIG.EMAILJS_SERVICE_ID,
+        CONFIG.EMAILJS_BOOKING_TEMPLATE_ID,
         templateParams,
-        EMAILJS_PUBLIC_KEY
+        CONFIG.EMAILJS_PUBLIC_KEY
     )
         .then(response => {
             console.log('Email sent successfully:', response);

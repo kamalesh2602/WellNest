@@ -115,14 +115,17 @@ router.post('/send-meeting-link', async (req, res) => {
     }
 });
 
-// Client Configuration Endpoint
+// Client Configuration Endpoint — returns all public runtime config to the frontend
 router.get('/config', (req, res) => {
     res.json({
-        EMAILJS_SERVICE_ID: process.env.EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID: process.env.EMAILJS_TEMPLATE_ID,
-        EMAILJS_PUBLIC_KEY: process.env.EMAILJS_PUBLIC_KEY,
+        API_BASE_URL: process.env.API_BASE_URL || '',
+        EMAILJS_SERVICE_ID: process.env.EMAILJS_SERVICE_ID || '',
+        EMAILJS_TEMPLATE_ID: process.env.EMAILJS_TEMPLATE_ID || '',
+        EMAILJS_BOOKING_TEMPLATE_ID: process.env.EMAILJS_BOOKING_TEMPLATE_ID || '',
+        EMAILJS_PUBLIC_KEY: process.env.EMAILJS_PUBLIC_KEY || '',
         JITSI_DOMAIN: process.env.JITSI_DOMAIN || 'meet.jit.si'
     });
 });
+
 
 module.exports = router;

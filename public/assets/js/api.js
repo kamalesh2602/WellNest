@@ -1,7 +1,7 @@
 const API = {
     async fetchJSON(endpoint, options = {}) {
         const url = `${CONFIG.API_BASE_URL}${endpoint}`;
-        
+
         const headers = {
             'Content-Type': 'application/json',
             ...options.headers

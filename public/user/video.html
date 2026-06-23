@@ -22,10 +22,10 @@
 
 
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-<script>
-  emailjs.init("Uyf-kE1C7m379m9eg"); // Replace with your EmailJS public key
-</script>
-<script src="video.js"></script>
+  <!-- Config and API layer must load before video.js -->
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/api.js"></script>
+  <script src="video.js"></script>
 
 </body>
 </html>

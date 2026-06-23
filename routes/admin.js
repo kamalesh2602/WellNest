@@ -7,16 +7,15 @@ const adminAuth = require('../middleware/adminAuth');
 // Admin login check
 router.post('/login', (req, res) => {
     const { secret } = req.body;
-    
-    if (!secret) {
-        return res.status(400).json({ message: 'Admin secret is required' });
-    }
+
+    console.log('Received:', JSON.stringify(secret));
+    console.log('Expected:', JSON.stringify(process.env.ADMIN_SECRET));
 
     if (secret === process.env.ADMIN_SECRET) {
         return res.status(200).json({ message: 'Login successful' });
-    } else {
-        return res.status(401).json({ message: 'Invalid Admin credentials' });
     }
+
+    return res.status(401).json({ message: 'Invalid Admin credentials' });
 });
 
 // Protect all following routes with admin auth

@@ -1,38 +1,30 @@
-const form = document.getElementById("form");
-const cname = document.getElementById("cname");
-const cemail = document.getElementById("cemail");
-const cpassword = document.getElementById("cpassword");
-const ctype = document.getElementById('ctype')
+/**
+ * admin/addcounsellors.js
+ * Uses the centralized API object — no hardcoded URLs.
+ */
+
+const form = document.getElementById('add-counsellor-form') || document.getElementById('form');
+const cname = document.getElementById('cname');
+const cemail = document.getElementById('cemail');
+const cpassword = document.getElementById('cpassword');
+const ctype = document.getElementById('ctype');
 
 form.addEventListener('submit', async function (e) {
-    e.preventDefault(); 
+    e.preventDefault();
 
     const formData = {
-        name : cname.value.trim(),
-        email : cemail.value.trim(),
-        ctype : ctype.value.trim(),
-        password : cpassword.value.trim()
+        name: cname.value.trim(),
+        email: cemail.value.trim(),
+        ctype: ctype.value.trim(),
+        password: cpassword.value.trim()
     };
 
-
     try {
-        const response = await fetch('https://wellnest-2ymx.onrender.com/admin/submit', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData),
-        });
+        await API.addCounsellor(formData);
+        alert('✅ Counsellor Added');
+        form.reset();
 
-        if (response.ok) {
-            alert('✅ Counsellor Added');
-            form.reset(); 
-            
-        } else {
-            const errorData = await response.json();
-            alert(`❌ Error: ${errorData.message}`);
-        }
     } catch (error) {
-        alert(`❌ Error submitting data: ${error.message}`);
+        alert(`❌ Error: ${error.message}`);
     }
 });
-
-
