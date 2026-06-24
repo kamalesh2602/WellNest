@@ -85,7 +85,7 @@ function bookSlot(slot) {
     API.bookSlot(bookingData)
         .then(data => {
             if (data.message === 'Booking successful!') {
-                sendConfirmationEmail(bookingData);
+                // sendConfirmationEmail(bookingData); // EmailJS disabled
                 alert('Booking successful!');
                 window.location.href = 'video.html';
             } else {
@@ -99,7 +99,30 @@ function bookSlot(slot) {
 }
 
 
-function sendConfirmationEmail(bookingData) {
+// EmailJS functionality removed
+// function sendConfirmationEmail(bookingData) {
+//     const templateParams = {
+//         userName: bookingData.userName,
+//         counsellorEmail: bookingData.counsellorEmail,
+//         counsellor_name: bookingData.counsellorName,
+//         date: bookingData.date,
+//         time: bookingData.time,
+//     };
+// 
+//     emailjs.send(
+//         CONFIG.EMAILJS_SERVICE_ID,
+//         CONFIG.EMAILJS_BOOKING_TEMPLATE_ID,
+//         templateParams,
+//         CONFIG.EMAILJS_PUBLIC_KEY
+//     )
+//         .then(response => {
+//             console.log('Email sent successfully:', response);
+//         })
+//         .catch(error => {
+//             console.error('Failed to send email:', error);
+//         });
+// }
+
     const templateParams = {
         userName: bookingData.userName,
         counsellorEmail: bookingData.counsellorEmail,
@@ -108,16 +131,16 @@ function sendConfirmationEmail(bookingData) {
         time: bookingData.time,
     };
 
-    emailjs.send(
-        CONFIG.EMAILJS_SERVICE_ID,
-        CONFIG.EMAILJS_BOOKING_TEMPLATE_ID,
-        templateParams,
-        CONFIG.EMAILJS_PUBLIC_KEY
-    )
-        .then(response => {
-            console.log('Email sent successfully:', response);
-        })
-        .catch(error => {
-            console.error('Failed to send email:', error);
-        });
-}
+    // emailjs.send(
+    //     CONFIG.EMAILJS_SERVICE_ID,
+    //     CONFIG.EMAILJS_BOOKING_TEMPLATE_ID,
+    //     templateParams,
+    //     CONFIG EMAILJS_PUBLIC_KEY
+    // )
+    //     .then(response => {
+    //         console.log('Email sent successfully:', response);
+    //     })
+    //     .catch(error => {
+    //         console.error('Failed to send email:', error);
+    //     });
+// }

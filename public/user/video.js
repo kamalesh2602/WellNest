@@ -60,24 +60,25 @@ function checkMeetingStart() {
 
         API.sendMeetingLink(activeBooking._id)
             .then(() => {
-                emailjs.send(
-                    CONFIG.EMAILJS_SERVICE_ID,
-                    CONFIG.EMAILJS_TEMPLATE_ID,
-                    {
-                        to_email: activeBooking.counsellorEmail,
-                        counsellor_name: activeBooking.counsellorName,
-                        user_name: activeBooking.userName,
-                        meeting_link: meetingLink,
-                        date_time: `${activeBooking.date} at ${activeBooking.time}`
-                    },
-                    CONFIG.EMAILJS_PUBLIC_KEY
-                )
-                    .then(response => {
-                        console.log('✅ Email sent successfully:', response.status, response.text);
-                    })
-                    .catch(error => {
-                        console.error('❌ Failed to send email:', error);
-                    });
+// EmailJS disabled: send email notification
+//                emailjs.send(
+//                    CONFIG.EMAILJS_SERVICE_ID,
+//                    CONFIG.EMAILJS_TEMPLATE_ID,
+//                    {
+//                        to_email: activeBooking.counsellorEmail,
+//                        counsellor_name: activeBooking.counsellorName,
+//                        user_name: activeBooking.userName,
+//                        meeting_link: meetingLink,
+//                        date_time: `${activeBooking.date} at ${activeBooking.time}`
+//                    },
+//                    CONFIG.EMAILJS_PUBLIC_KEY
+//                )
+//                    .then(response => {
+//                        console.log('✅ Email sent successfully:', response.status, response.text);
+//                    })
+//                    .catch(error => {
+//                        console.error('❌ Failed to send email:', error);
+//                    });
 
                 console.log('📧 Email sent + meeting started');
                 showJitsiMeeting();
