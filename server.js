@@ -13,7 +13,7 @@ const generalRoutes = require('./routes/general');
 const app = express();
 
 
-console.log('ADMIN_SECRET =', process.env.ADMIN_SECRET);
+// console.log('ADMIN_SECRET =', process.env.ADMIN_SECRET);
 // Connect to Database
 connectDB();
 

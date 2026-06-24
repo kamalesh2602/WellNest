@@ -4,17 +4,6 @@
 
 ---
 
-## 📋 Table of Contents
-
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Running Locally](#running-locally)
-- [Environment Variables](#environment-variables)
-- [Portal Access](#portal-access)
-- [Features](#features)
-
----
-
 ## 🛠 Tech Stack
 
 | Layer       | Technology                          |
