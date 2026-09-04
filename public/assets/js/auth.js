@@ -2,12 +2,12 @@ const AUTH = {
     logout() {
         localStorage.clear();
         sessionStorage.clear();
-        // Redirect to index page regardless of subfolder depth
+        // Redirect to main index page
         const path = window.location.pathname;
         if (path.includes('/admin/') || path.includes('/counsellor/') || path.includes('/user/')) {
-            window.location.href = '../../index.html';
-        } else {
             window.location.href = '../index.html';
+        } else {
+            window.location.href = 'index.html';
         }
     },
 
@@ -16,8 +16,12 @@ const AUTH = {
         const userName = localStorage.getItem('userName');
         if (!userId || !userName) {
             alert('Access denied. Please log in first.');
-            // Dynamically calculate redirect path
-            window.location.href = 'login.html';
+            const path = window.location.pathname;
+            if (path.includes('/user/')) {
+                window.location.href = 'login.html';
+            } else {
+                window.location.href = 'user/login.html';
+            }
         }
     },
 
@@ -25,7 +29,12 @@ const AUTH = {
         const counsellorEmail = localStorage.getItem('counsellorEmail');
         if (!counsellorEmail) {
             alert('Access denied. Please log in first.');
-            window.location.href = 'clogin.html';
+            const path = window.location.pathname;
+            if (path.includes('/counsellor/')) {
+                window.location.href = 'clogin.html';
+            } else {
+                window.location.href = 'counsellor/clogin.html';
+            }
         }
     },
 
@@ -33,12 +42,11 @@ const AUTH = {
         const adminSecret = sessionStorage.getItem('adminSecret');
         if (!adminSecret) {
             alert('Access denied. Admin credentials required.');
-            // Go to login
             const path = window.location.pathname;
             if (path.includes('/admin/')) {
-                window.location.href = './admin.html';
-            } else {
                 window.location.href = 'admin.html';
+            } else {
+                window.location.href = 'admin/admin.html';
             }
         }
     }

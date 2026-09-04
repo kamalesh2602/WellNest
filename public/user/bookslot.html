@@ -4,11 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WELLNEST</title>
+  <title>WellNest | Available Slots</title>
   <link rel="stylesheet" href="bookslot.css">
-
-
-
 </head>
 
 <body>
@@ -19,7 +16,7 @@
     <nav>
       <ul>
         <li><a href="modules.html">Modules</a></li>
-        <li><a href="home.html">Log Out</a></li>
+        <li><a href="#" onclick="AUTH.logout(); return false;">Log Out</a></li>
       </ul>
     </nav>
   </header>
@@ -28,16 +25,14 @@
 
   </div>
   <footer>
-    <h3>&copy 2025 WellNest</h3>
+    <h3>&copy; 2025 WellNest</h3>
   </footer>
 
-
-
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
-  <!-- Config and API layer must load before bookslot.js -->
+  <!-- Scripts -->
   <script src="../assets/js/config.js"></script>
   <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/auth.js"></script>
+  <script src="../assets/js/utilities.js"></script>
   <script src="bookslot.js"></script>
 
 </body>

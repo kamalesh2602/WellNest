@@ -16,12 +16,6 @@
 const CONFIG = {
     API_BASE_URL: '',          // '' = relative URLs, works out-of-the-box on localhost
 
-    // EmailJS — get these from https://www.emailjs.com/docs/
-    EMAILJS_SERVICE_ID: '',
-    EMAILJS_TEMPLATE_ID: '',
-    EMAILJS_BOOKING_TEMPLATE_ID: '',
-    EMAILJS_PUBLIC_KEY: '',
-
     // Jitsi Meet server
     JITSI_DOMAIN: 'meet.jit.si'
 };

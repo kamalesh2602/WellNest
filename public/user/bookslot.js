@@ -1,30 +1,29 @@
 /**
  * user/bookslot.js
- * Uses the centralized API object and CONFIG for EmailJS keys.
- * No hardcoded URLs anywhere.
+ * Uses centralized API object, AUTH guard, and UTILS helper.
  */
 
 document.addEventListener('DOMContentLoaded', function () {
+    AUTH.checkUserAuth();
     fetchSlots();
 });
 
-
-
 function fetchSlots() {
+    UTILS.showLoading('main', 'Loading available slots...');
+
     API.getSlots()
         .then(slots => displaySlots(slots))
         .catch(error => {
             console.error('Error fetching slots:', error);
-            alert('Failed to load available slots. Please try again later.');
+            UTILS.showError('main', 'Failed to load available slots. Please try again later.');
         });
 }
-
 
 function displaySlots(slots) {
     const mainDiv = document.getElementById('main');
     mainDiv.innerHTML = '';
 
-    if (slots.length === 0) {
+    if (!slots || slots.length === 0) {
         mainDiv.innerHTML = '<p>No available slots at the moment. Please check back later.</p>';
         return;
     }
@@ -44,14 +43,14 @@ function displaySlots(slots) {
         counsellorInfo.innerHTML = `
             <h3>${slot.counsellorName}</h3>
             <h3>Counsellor Type: ${slot.counsellorType}</h3>
-            <p>Date: ${slot.slotDate}</p>
+            <p>Date: ${UTILS.formatDate(slot.slotDate)}</p>
             <p>Time: ${slot.slotTime}</p>
         `;
 
         const bookButton = document.createElement('button');
         bookButton.textContent = 'Book Slot';
         bookButton.className = 'book-button';
-        bookButton.addEventListener('click', () => bookSlot(slot));
+        bookButton.addEventListener('click', (e) => bookSlot(slot, e.target));
 
         slotCard.appendChild(counsellorInfo);
         slotCard.appendChild(bookButton);
@@ -61,14 +60,21 @@ function displaySlots(slots) {
     mainDiv.appendChild(slotsContainer);
 }
 
-
-function bookSlot(slot) {
+function bookSlot(slot, buttonEl) {
     const userId = localStorage.getItem('userId');
     const userName = localStorage.getItem('userName');
 
     if (!userId || !userName) {
-        alert('Booking cancelled. User information is required. Please log in again.');
+        alert('Booking cancelled. User session expired. Please log in again.');
+        AUTH.logout();
         return;
+    }
+
+    // Disable button to prevent repeated clicks while request is in progress
+    const originalText = buttonEl ? buttonEl.textContent : 'Book Slot';
+    if (buttonEl) {
+        buttonEl.textContent = 'Booking...';
+        buttonEl.disabled = true;
     }
 
     const bookingData = {
@@ -85,7 +91,6 @@ function bookSlot(slot) {
     API.bookSlot(bookingData)
         .then(data => {
             if (data.message === 'Booking successful!') {
-                // sendConfirmationEmail(bookingData); // EmailJS disabled
                 alert('Booking successful!');
                 window.location.href = 'video.html';
             } else {
@@ -95,52 +100,13 @@ function bookSlot(slot) {
         .catch(error => {
             console.error('Error booking slot:', error);
             alert(`Booking failed: ${error.message}`);
+            // Re-fetch slots to reflect current availability
+            fetchSlots();
+        })
+        .finally(() => {
+            if (buttonEl) {
+                buttonEl.textContent = originalText;
+                buttonEl.disabled = false;
+            }
         });
 }
-
-
-// EmailJS functionality removed
-// function sendConfirmationEmail(bookingData) {
-//     const templateParams = {
-//         userName: bookingData.userName,
-//         counsellorEmail: bookingData.counsellorEmail,
-//         counsellor_name: bookingData.counsellorName,
-//         date: bookingData.date,
-//         time: bookingData.time,
-//     };
-// 
-//     emailjs.send(
-//         CONFIG.EMAILJS_SERVICE_ID,
-//         CONFIG.EMAILJS_BOOKING_TEMPLATE_ID,
-//         templateParams,
-//         CONFIG.EMAILJS_PUBLIC_KEY
-//     )
-//         .then(response => {
-//             console.log('Email sent successfully:', response);
-//         })
-//         .catch(error => {
-//             console.error('Failed to send email:', error);
-//         });
-// }
-
-    const templateParams = {
-        userName: bookingData.userName,
-        counsellorEmail: bookingData.counsellorEmail,
-        counsellor_name: bookingData.counsellorName,
-        date: bookingData.date,
-        time: bookingData.time,
-    };
-
-    // emailjs.send(
-    //     CONFIG.EMAILJS_SERVICE_ID,
-    //     CONFIG.EMAILJS_BOOKING_TEMPLATE_ID,
-    //     templateParams,
-    //     CONFIG EMAILJS_PUBLIC_KEY
-    // )
-    //     .then(response => {
-    //         console.log('Email sent successfully:', response);
-    //     })
-    //     .catch(error => {
-    //         console.error('Failed to send email:', error);
-    //     });
-// }

@@ -34,6 +34,51 @@ router.post('/login', async (req, res) => {
     }
 });
 
+/**
+ * Safely parses slotDate and slotTime and checks if it is in the past.
+ */
+function isSlotInPast(slotDate, slotTime) {
+    if (!slotDate || !slotTime) return true;
+
+    const trimmedDate = String(slotDate).trim();
+    const trimmedTime = String(slotTime).trim();
+
+    let slotDateTime = null;
+
+    if (/^\d{4}-\d{2}-\d{2}$/.test(trimmedDate)) {
+        const timeParts = trimmedTime.split(':');
+        const hh = (timeParts[0] || '00').padStart(2, '0');
+        const mm = (timeParts[1] || '00').padStart(2, '0');
+        const ss = (timeParts[2] || '00').padStart(2, '0');
+        slotDateTime = new Date(`${trimmedDate}T${hh}:${mm}:${ss}`);
+    } else if (trimmedDate.includes('/')) {
+        const parts = trimmedDate.split('/');
+        if (parts.length === 3) {
+            let year, month, day;
+            if (parts[0].length === 4) [year, month, day] = parts;
+            else if (parts[2].length === 4) [day, month, year] = parts;
+            if (year && month && day) {
+                const formattedDate = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+                const timeParts = trimmedTime.split(':');
+                const hh = (timeParts[0] || '00').padStart(2, '0');
+                const mm = (timeParts[1] || '00').padStart(2, '0');
+                const ss = (timeParts[2] || '00').padStart(2, '0');
+                slotDateTime = new Date(`${formattedDate}T${hh}:${mm}:${ss}`);
+            }
+        }
+    }
+
+    if (!slotDateTime || isNaN(slotDateTime.getTime())) {
+        slotDateTime = new Date(`${trimmedDate} ${trimmedTime}`);
+    }
+
+    if (!slotDateTime || isNaN(slotDateTime.getTime())) {
+        return true; // Invalid date/time format
+    }
+
+    return slotDateTime.getTime() <= Date.now();
+}
+
 // Counsellor Add Slot
 router.post('/addslot', async (req, res) => {
     try {
@@ -41,6 +86,11 @@ router.post('/addslot', async (req, res) => {
 
         if (!counsellorName || !counsellorEmail || !counsellorType || !slotDate || !slotTime) {
             return res.status(400).json({ message: 'All fields are required' });
+        }
+
+        // Validate that slot is not in the past
+        if (isSlotInPast(slotDate, slotTime)) {
+            return res.status(400).json({ message: 'Cannot create a slot in the past. Please select a future date and time.' });
         }
 
         // Check if counsellor already has a slot at this date and time to prevent duplicates

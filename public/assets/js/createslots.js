@@ -19,6 +19,13 @@ async function handleCreateSlot(e) {
         return;
     }
 
+    // Validate that selected date and time are in the future
+    const selectedDateTime = new Date(`${slotDate}T${slotTime}:00`);
+    if (!isNaN(selectedDateTime.getTime()) && selectedDateTime.getTime() <= Date.now()) {
+        alert('Cannot create a slot in the past. Please select a future date and time.');
+        return;
+    }
+
     // Retrieve counsellor details from localStorage
     const counsellorName = localStorage.getItem('counsellorName');
     const counsellorEmail = localStorage.getItem('counsellorEmail');

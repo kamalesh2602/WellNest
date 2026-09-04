@@ -42,9 +42,8 @@ const bookingSchema = new mongoose.Schema({
     timestamps: true
 });
 
-// Index userId and counsellorEmail for quick retrieval
+// Index userId for quick user lookup
 bookingSchema.index({ userId: 1 });
-bookingSchema.index({ counsellorEmail: 1 });
 
 // Compound unique index to prevent two users from booking the same counsellor at the same date/time
 bookingSchema.index({ counsellorEmail: 1, date: 1, time: 1 }, { unique: true });
