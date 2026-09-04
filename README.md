@@ -165,7 +165,7 @@ All portals are served from `http://localhost:3000`.
 | User Sign Up  | `/user/signup.html`                      | Register with name, email, Aadhar, phone, password        |
 | User Login    | `/user/login.html`                       | Use registered email + password                           |
 | Counsellor Login | `/counsellor/clogin.html`            | Added by Admin; login with email + password               |
-| Admin Login   | `/admin/adminlogin.html`                 | Use email `admin@wellnest.com` + `ADMIN_SECRET` from `.env` |
+| Admin Login   | `/admin/admin.html`                 | Use email `admin@wellnest.com` + `ADMIN_SECRET` from `.env` |
 
 > **Admin email is fixed** as `admin@wellnest.com`. The password is whatever you set as `ADMIN_SECRET` in `.env`.
 

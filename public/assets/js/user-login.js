@@ -15,7 +15,7 @@ async function handleUserLogin(e) {
     const password = passwordInput.value.trim();
 
     if (!nameemail || !password) {
-        alert('Name/Email and password are required!');
+        UTILS.showMessage('Name/Email and password are required.', 'info');
         return;
     }
 
@@ -32,11 +32,16 @@ async function handleUserLogin(e) {
         localStorage.setItem('userName', response.user.name);
         localStorage.setItem('userEmail', response.user.email);
 
-        alert(`✅ Login successful! Welcome back, ${response.user.name}`);
-        window.location.href = "modules.html";
+        UTILS.showMessage(`Welcome back, ${response.user.name}!`, 'success');
+        setTimeout(() => {
+            window.location.href = "modules.html";
+        }, 800);
     } catch (error) {
         console.error('User login error:', error);
-        alert(`❌ Login failed: ${error.message}`);
+        const userMsg = error.message.includes('Failed to fetch') 
+            ? 'Unable to connect to the server. Please try again.' 
+            : error.message;
+        UTILS.showMessage(userMsg, 'error');
     } finally {
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;

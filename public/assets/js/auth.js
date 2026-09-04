@@ -15,7 +15,7 @@ const AUTH = {
         const userId = localStorage.getItem('userId');
         const userName = localStorage.getItem('userName');
         if (!userId || !userName) {
-            alert('Access denied. Please log in first.');
+            if (window.UTILS) UTILS.showMessage('Please log in to continue.', 'info');
             const path = window.location.pathname;
             if (path.includes('/user/')) {
                 window.location.href = 'login.html';
@@ -28,7 +28,7 @@ const AUTH = {
     checkCounsellorAuth() {
         const counsellorEmail = localStorage.getItem('counsellorEmail');
         if (!counsellorEmail) {
-            alert('Access denied. Please log in first.');
+            if (window.UTILS) UTILS.showMessage('Please log in to continue.', 'info');
             const path = window.location.pathname;
             if (path.includes('/counsellor/')) {
                 window.location.href = 'clogin.html';

@@ -17,25 +17,25 @@ async function handleUserSignup(e) {
 
     // Field requirements check
     if (!name || !email || !phno || !aadhar || !password || !cpassword) {
-        alert('All fields are required!');
+        UTILS.showMessage('All fields are required.', 'info');
         return;
     }
 
     // Password matches check
     if (password !== cpassword) {
-        alert('Passwords do not match!');
+        UTILS.showMessage('Passwords do not match.', 'error');
         return;
     }
 
     // Phone number format validation (exactly 10 digits)
     if (!/^\d{10}$/.test(phno)) {
-        alert('Phone number must be exactly 10 digits.');
+        UTILS.showMessage('Phone number must be exactly 10 digits.', 'info');
         return;
     }
 
     // Aadhar number format validation (exactly 12 digits)
     if (!/^\d{12}$/.test(aadhar)) {
-        alert('Aadhar number must be exactly 12 digits.');
+        UTILS.showMessage('Aadhar number must be exactly 12 digits.', 'info');
         return;
     }
 
@@ -48,19 +48,28 @@ async function handleUserSignup(e) {
     };
 
     const submitBtn = e.target.querySelector('button[type="submit"]');
-    const originalText = submitBtn.textContent;
-    submitBtn.textContent = 'Registering...';
-    submitBtn.disabled = true;
+    const originalText = submitBtn ? submitBtn.textContent : 'Sign Up';
+    if (submitBtn) {
+        submitBtn.textContent = 'Registering...';
+        submitBtn.disabled = true;
+    }
 
     try {
         await API.signupUser(userData);
-        alert('✅ Registration successful! Please log in to continue.');
-        window.location.href = "login.html";
+        UTILS.showMessage('Account created successfully! Please log in to continue.', 'success');
+        setTimeout(() => {
+            window.location.href = "login.html";
+        }, 1000);
     } catch (error) {
         console.error('Registration error:', error);
-        alert(`❌ Registration failed: ${error.message}`);
+        const userMsg = error.message.includes('Failed to fetch') 
+            ? 'Unable to connect to the server. Please try again.' 
+            : error.message;
+        UTILS.showMessage(userMsg, 'error');
     } finally {
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
+        if (submitBtn) {
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        }
     }
 }

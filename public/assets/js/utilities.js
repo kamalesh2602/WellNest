@@ -53,8 +53,8 @@ const UTILS = {
         }
     },
 
-    // Success toast notification
-    showSuccessToast(message) {
+    // Reusable message toast notification ('success', 'error', 'info')
+    showMessage(message, type = 'info', duration = 3500) {
         let toastContainer = document.getElementById('toast-container');
         if (!toastContainer) {
             toastContainer = document.createElement('div');
@@ -62,10 +62,16 @@ const UTILS = {
             document.body.appendChild(toastContainer);
         }
 
+        const icons = {
+            success: '✅',
+            error: '⚠️',
+            info: 'ℹ️'
+        };
+
         const toast = document.createElement('div');
-        toast.className = 'toast toast-success';
+        toast.className = `toast toast-${type}`;
         toast.innerHTML = `
-            <span class="toast-icon">✅</span>
+            <span class="toast-icon">${icons[type] || 'ℹ️'}</span>
             <span class="toast-message">${message}</span>
         `;
         toastContainer.appendChild(toast);
@@ -77,6 +83,16 @@ const UTILS = {
         setTimeout(() => {
             toast.classList.remove('show');
             setTimeout(() => toast.remove(), 400);
-        }, 3500);
+        }, duration);
+    },
+
+    // Legacy alias for success toast notification
+    showSuccessToast(message) {
+        this.showMessage(message, 'success');
     }
 };
+
+// Global helper alias
+function showMessage(message, type, duration) {
+    UTILS.showMessage(message, type, duration);
+}

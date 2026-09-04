@@ -11,45 +11,64 @@ const aadhar = document.querySelector('#aadhar');
 const password = document.querySelector('#password');
 const cpassword = document.querySelector('#cpassword');
 
-form.addEventListener('submit', async function (e) {
-    e.preventDefault();
+if (form) {
+    form.addEventListener('submit', async function (e) {
+        e.preventDefault();
 
-    const formData = {
-        name: name.value.trim(),
-        email: email.value.trim(),
-        phno: phno.value.trim(),
-        aadhar: aadhar.value.trim(),
-        password: password.value.trim(),
-    };
+        const formData = {
+            name: name.value.trim(),
+            email: email.value.trim(),
+            phno: phno.value.trim(),
+            aadhar: aadhar.value.trim(),
+            password: password.value.trim(),
+        };
 
-    // Validation
-    if (!formData.name || !formData.email || !formData.phno || !formData.aadhar || !formData.password || !cpassword.value.trim()) {
-        alert('All fields are required!');
-        return;
-    }
+        // Validation
+        if (!formData.name || !formData.email || !formData.phno || !formData.aadhar || !formData.password || !cpassword.value.trim()) {
+            UTILS.showMessage('All fields are required.', 'info');
+            return;
+        }
 
-    if (formData.password !== cpassword.value.trim()) {
-        alert('Passwords do not match!');
-        return;
-    }
+        if (formData.password !== cpassword.value.trim()) {
+            UTILS.showMessage('Passwords do not match.', 'error');
+            return;
+        }
 
-    if (!/^\d{10}$/.test(formData.phno)) {
-        alert('Phone number must be exactly 10 digits.');
-        return;
-    }
+        if (!/^\d{10}$/.test(formData.phno)) {
+            UTILS.showMessage('Phone number must be exactly 10 digits.', 'info');
+            return;
+        }
 
-    if (!/^\d{12}$/.test(formData.aadhar)) {
-        alert('Aadhar number must be exactly 12 digits.');
-        return;
-    }
+        if (!/^\d{12}$/.test(formData.aadhar)) {
+            UTILS.showMessage('Aadhar number must be exactly 12 digits.', 'info');
+            return;
+        }
 
-    try {
-        await API.signupUser(formData);
-        alert('✅ Data submitted successfully!');
-        form.reset();
-        window.location.href = 'login.html';
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn ? submitBtn.textContent : 'Sign Up';
+        if (submitBtn) {
+            submitBtn.textContent = 'Registering...';
+            submitBtn.disabled = true;
+        }
 
-    } catch (error) {
-        alert(`❌ Error: ${error.message}`);
-    }
-});
+        try {
+            await API.signupUser(formData);
+            UTILS.showMessage('Account created successfully! Please log in to continue.', 'success');
+            form.reset();
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 1000);
+        } catch (error) {
+            console.error('Signup error:', error);
+            const userMsg = error.message.includes('Failed to fetch') 
+                ? 'Unable to connect to the server. Please try again.' 
+                : error.message;
+            UTILS.showMessage(userMsg, 'error');
+        } finally {
+            if (submitBtn) {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        }
+    });
+}

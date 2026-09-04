@@ -65,8 +65,10 @@ function bookSlot(slot, buttonEl) {
     const userName = localStorage.getItem('userName');
 
     if (!userId || !userName) {
-        alert('Booking cancelled. User session expired. Please log in again.');
-        AUTH.logout();
+        UTILS.showMessage('User session expired. Please log in again.', 'info');
+        setTimeout(() => {
+            AUTH.logout();
+        }, 1000);
         return;
     }
 
@@ -91,15 +93,20 @@ function bookSlot(slot, buttonEl) {
     API.bookSlot(bookingData)
         .then(data => {
             if (data.message === 'Booking successful!') {
-                alert('Booking successful!');
-                window.location.href = 'video.html';
+                UTILS.showMessage('Booking successful!', 'success');
+                setTimeout(() => {
+                    window.location.href = 'video.html';
+                }, 800);
             } else {
                 throw new Error(data.message || 'Booking failed');
             }
         })
         .catch(error => {
             console.error('Error booking slot:', error);
-            alert(`Booking failed: ${error.message}`);
+            const userMsg = error.message.includes('Failed to fetch') 
+                ? 'Unable to connect to the server. Please try again.' 
+                : error.message;
+            UTILS.showMessage(`Booking failed: ${userMsg}`, 'error');
             // Re-fetch slots to reflect current availability
             fetchSlots();
         })

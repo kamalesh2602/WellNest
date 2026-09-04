@@ -353,6 +353,14 @@ select:focus {
     border-left: 4px solid var(--success-color);
 }
 
+.toast-error {
+    border-left: 4px solid var(--danger-color);
+}
+
+.toast-info {
+    border-left: 4px solid var(--primary-color);
+}
+
 /* --- Footer --- */
 footer {
     text-align: center;
