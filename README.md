@@ -34,6 +34,7 @@
 | **Frontend** | HTML5, CSS3 (Vanilla CSS), JavaScript (ES6+) |
 | **Backend** | Node.js, Express.js |
 | **Database** | MongoDB & Mongoose |
+| **Testing** | Jest, Supertest, MongoDB Memory Server |
 | **Integrations** | Jitsi Meet API (Video Consultation), EmailJS (Notifications) |
 
 ---
@@ -42,6 +43,8 @@
 
 ```text
 WellNest/
+├── app.js                 # Express application setup & route configuration
+├── server.js              # Application entry point & DB server connection
 ├── config/
 │   └── db.js              # Database connection setup
 ├── middleware/
@@ -52,10 +55,17 @@ WellNest/
 │   ├── Slot.js            # Availability slot model
 │   └── Booking.js         # Appointment booking model
 ├── routes/
-│   ├── auth.js            # Authentication endpoints
+│   ├── auth.js            # User authentication endpoints
 │   ├── admin.js           # Admin portal API
 │   ├── counsellor.js      # Counsellor & slot management API
-│   └── general.js         # Public API routes
+│   └── general.js         # Public & booking API routes
+├── tests/
+│   ├── setup.js           # In-memory MongoDB test configuration
+│   ├── admin.test.js      # Admin authentication API tests
+│   ├── auth.test.js       # User signup & login API tests
+│   ├── booking.test.js    # Slot booking API tests
+│   ├── counsellor.test.js # Counsellor authentication API tests
+│   └── slot.test.js       # Slot creation & cleanup API tests
 ├── public/
 │   ├── index.html         # WellNest landing page
 │   ├── admin/             # Admin portal interface
@@ -63,8 +73,7 @@ WellNest/
 │   ├── user/              # User portal interface
 │   └── assets/            # CSS styles, JS scripts, images & logos
 ├── .env.example           # Template for environment configuration
-├── server.js              # Application entry point
-└── package.json           # Dependencies and scripts
+└── package.json           # Dependencies and test scripts
 ```
 
 ---
@@ -130,6 +139,48 @@ npm start
 
 Once running, access the application in your browser:
 👉 **[http://localhost:3000](http://localhost:3000)**
+
+---
+
+## 🧪 Testing
+
+WellNest includes an automated backend API testing suite built with **Jest**, **Supertest**, and **MongoDB Memory Server**.
+
+### Testing Stack
+- **Jest**: Test runner and assertion framework.
+- **Supertest**: Library for testing HTTP endpoints directly against the Express app.
+- **MongoDB Memory Server**: Provides an isolated in-memory MongoDB database for tests. Tests do NOT touch local or production MongoDB databases.
+
+### Run tests locally
+
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+2. **Run all tests:**
+   ```bash
+   npm test
+   ```
+
+### Continuous Integration (CI)
+Automated testing is integrated into GitHub Actions via `.github/workflows/node.js.yml`. Tests automatically run on Node.js 22.x whenever code is pushed to `main` or a pull request is created, without requiring external database credentials.
+
+### Example Test Output
+
+```text
+PASS tests/admin.test.js
+PASS tests/auth.test.js
+PASS tests/counsellor.test.js
+PASS tests/slot.test.js
+PASS tests/booking.test.js
+
+Test Suites: 5 passed, 5 total
+Tests:       15 passed, 15 total
+Snapshots:   0 total
+Time:        3.456 s
+Ran all test suites.
+```
 
 ---
 
