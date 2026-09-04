@@ -26,19 +26,7 @@ const allowedOrigins = [
     'http://127.0.0.1:5500' // VS Code Live Server
 ].filter(Boolean);
 
-app.use(cors({
-    origin: function (origin, callback) {
-        // Allow requests with no origin (like mobile apps or curl)
-        if (!origin) return callback(null, true);
-        if (allowedOrigins.indexOf(origin) !== -1 || origin.startsWith('http://localhost') || origin.startsWith('http://127.0.0.1')) {
-            return callback(null, true);
-        } else {
-            return callback(new Error('Not allowed by CORS policy'));
-        }
-    },
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    credentials: true
-}));
+app.use(cors());
 
 // Middlewares
 app.use(express.json());
