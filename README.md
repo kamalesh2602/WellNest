@@ -32,7 +32,7 @@
 | Layer | Technologies |
 | :--- | :--- |
 | **Frontend** | HTML5, CSS3 (Vanilla CSS), JavaScript (ES6+) |
-| **Backend** | Node.js, Express.js, Morgan, express-rate-limit |
+| **Backend** | Node.js, Express.js, Helmet, Morgan, express-rate-limit |
 | **Database** | MongoDB & Mongoose |
 | **Testing** | Jest, Supertest, MongoDB Memory Server |
 | **Integrations** | Jitsi Meet API (Video Consultation), EmailJS (Notifications) |
@@ -185,19 +185,19 @@ Ran all test suites.
 
 ---
 
-## 🪵 Request Logging & Rate Limiting
+## 🛡 Security, Rate Limiting & Request Logging
 
-### Request Logging
+### Security
 
-WellNest uses Morgan to log HTTP requests and response status information, which is useful for local development and monitoring deployed requests.
+WellNest uses Helmet to add standard HTTP security headers.
 
 ### Rate Limiting
 
-WellNest uses express-rate-limit to reduce excessive API requests.
+WellNest uses express-rate-limit to reduce excessive requests, with stricter protection on authentication endpoints.
 
-- General API requests have a reasonable limit.
-- Authentication endpoints (`POST /login`, `POST /submit`, `POST /counsellor/login`, `POST /admin/login`) have a stricter limit.
-- HTTP 429 is returned when a client exceeds the configured limit.
+### Request Logging
+
+WellNest uses Morgan for HTTP request logging.
 
 ---
 

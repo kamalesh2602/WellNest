@@ -65,4 +65,14 @@ describe('Rate Limiting & Request Logging Middleware', () => {
             expect(typeof res.body).toBe('object');
         });
     });
+
+    describe('Helmet Security Headers', () => {
+        it('should include standard HTTP security headers on responses', async () => {
+            const res = await request(app).get('/config');
+            expect(res.statusCode).toBe(200);
+            expect(res.headers).toHaveProperty('x-content-type-options', 'nosniff');
+            expect(res.headers).toHaveProperty('content-security-policy');
+            expect(res.headers).toHaveProperty('referrer-policy');
+        });
+    });
 });

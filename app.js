@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
+const helmet = require('helmet');
 
 const authRoutes = require('./routes/auth');
 const adminRoutes = require('./routes/admin');
@@ -11,6 +12,24 @@ const app = express();
 
 // Trust proxy for reverse proxy deployment (Render, Heroku, etc.)
 app.set('trust proxy', 1);
+
+// HTTP security headers middleware (Helmet)
+app.use(
+    helmet({
+        contentSecurityPolicy: {
+            directives: {
+                defaultSrc: ["'self'"],
+                scriptSrc: ["'self'", "'unsafe-inline'", "https://meet.jit.si"],
+                scriptSrcAttr: ["'unsafe-inline'"],
+                styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+                fontSrc: ["'self'", "https://fonts.gstatic.com"],
+                imgSrc: ["'self'", "data:", "https:"],
+                frameSrc: ["'self'", "https://meet.jit.si"],
+                connectSrc: ["'self'", "https://meet.jit.si", "wss://meet.jit.si"]
+            }
+        }
+    })
+);
 
 // Parsing middleware
 app.use(express.json());
