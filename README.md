@@ -32,7 +32,7 @@
 | Layer | Technologies |
 | :--- | :--- |
 | **Frontend** | HTML5, CSS3 (Vanilla CSS), JavaScript (ES6+) |
-| **Backend** | Node.js, Express.js |
+| **Backend** | Node.js, Express.js, Morgan, express-rate-limit |
 | **Database** | MongoDB & Mongoose |
 | **Testing** | Jest, Supertest, MongoDB Memory Server |
 | **Integrations** | Jitsi Meet API (Video Consultation), EmailJS (Notifications) |
@@ -65,6 +65,7 @@ WellNest/
 │   ├── auth.test.js       # User signup & login API tests
 │   ├── booking.test.js    # Slot booking API tests
 │   ├── counsellor.test.js # Counsellor authentication API tests
+│   ├── rateLimit.test.js  # Rate limiting & Morgan logging API tests
 │   └── slot.test.js       # Slot creation & cleanup API tests
 ├── public/
 │   ├── index.html         # WellNest landing page
@@ -181,6 +182,22 @@ Snapshots:   0 total
 Time:        3.456 s
 Ran all test suites.
 ```
+
+---
+
+## 🪵 Request Logging & Rate Limiting
+
+### Request Logging
+
+WellNest uses Morgan to log HTTP requests and response status information, which is useful for local development and monitoring deployed requests.
+
+### Rate Limiting
+
+WellNest uses express-rate-limit to reduce excessive API requests.
+
+- General API requests have a reasonable limit.
+- Authentication endpoints (`POST /login`, `POST /submit`, `POST /counsellor/login`, `POST /admin/login`) have a stricter limit.
+- HTTP 429 is returned when a client exceeds the configured limit.
 
 ---
 
