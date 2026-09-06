@@ -173,3 +173,22 @@ footer {
   background: transparent;
   font-size: 0.85rem;
 }
+
+/* ==========================================================================
+   Mobile Responsiveness
+   ========================================================================== */
+
+@media (max-width: 600px) {
+  .container {
+    padding: 1.25rem 1rem;
+    align-items: flex-start;
+  }
+
+  .feedback-form {
+    padding: 1.75rem 1.25rem;
+  }
+
+  .feedback-form h2 {
+    font-size: 1.3rem;
+  }
+}

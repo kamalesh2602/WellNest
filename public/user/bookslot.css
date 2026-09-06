@@ -188,3 +188,22 @@ footer {
   background: transparent;
   font-size: 0.85rem;
 }
+
+/* ==========================================================================
+   Mobile Responsiveness
+   ========================================================================== */
+
+@media (max-width: 600px) {
+  #main {
+    width: 95%;
+    margin: 1.5rem auto;
+  }
+
+  .slots-container h2 {
+    font-size: 1.35rem;
+  }
+
+  .slot-card {
+    padding: 1.25rem;
+  }
+}
