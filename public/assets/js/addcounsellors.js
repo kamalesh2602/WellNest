@@ -4,12 +4,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const form = document.getElementById("add-counsellor-form");
     if (form) {
+        form.querySelectorAll('input, select').forEach(input => {
+            input.addEventListener('input', () => UTILS.clearFormError(form));
+        });
         form.addEventListener('submit', handleAddCounsellor);
     }
 });
 
 async function handleAddCounsellor(e) {
     e.preventDefault();
+    const form = e.target;
+    UTILS.clearFormError(form);
 
     const cname = document.getElementById("cname").value.trim();
     const cemail = document.getElementById("cemail").value.trim();
@@ -17,7 +22,7 @@ async function handleAddCounsellor(e) {
     const cpassword = document.getElementById("cpassword").value.trim();
 
     if (!cname || !cemail || !ctype || !cpassword) {
-        alert("All fields are required!");
+        UTILS.showFormError(form, "All fields are required!");
         return;
     }
 
@@ -29,21 +34,28 @@ async function handleAddCounsellor(e) {
     };
 
     const submitBtn = e.target.querySelector('button[type="submit"]');
-    const originalText = submitBtn.textContent;
-    submitBtn.textContent = 'Adding...';
-    submitBtn.disabled = true;
+    const originalText = submitBtn ? submitBtn.textContent : 'Add Counsellor';
+    if (submitBtn) {
+        submitBtn.textContent = 'Adding...';
+        submitBtn.disabled = true;
+    }
 
     try {
-        const response = await API.addCounsellor(formData);
+        await API.addCounsellor(formData);
         
         // Show success notification and reset form
-        UTILS.showSuccessToast('Counsellor Added successfully!');
-        document.getElementById("add-counsellor-form").reset();
+        UTILS.showSuccessToast('Counsellor added successfully!');
+        form.reset();
     } catch (error) {
         console.error('Error adding counsellor:', error);
-        alert(`❌ Failed to add counsellor: ${error.message}`);
+        const userMsg = error.message.includes('Failed to fetch') 
+            ? 'Unable to connect to the server. Please try again.' 
+            : error.message;
+        UTILS.showFormError(form, userMsg);
     } finally {
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
+        if (submitBtn) {
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        }
     }
 }

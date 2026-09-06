@@ -12,8 +12,14 @@ const password = document.querySelector('#password');
 const cpassword = document.querySelector('#cpassword');
 
 if (form) {
+    // Clear error banner when user types
+    form.querySelectorAll('input').forEach(input => {
+        input.addEventListener('input', () => UTILS.clearFormError(form));
+    });
+
     form.addEventListener('submit', async function (e) {
         e.preventDefault();
+        UTILS.clearFormError(form);
 
         const formData = {
             name: name.value.trim(),
@@ -25,22 +31,22 @@ if (form) {
 
         // Validation
         if (!formData.name || !formData.email || !formData.phno || !formData.aadhar || !formData.password || !cpassword.value.trim()) {
-            UTILS.showMessage('All fields are required.', 'info');
+            UTILS.showFormError(form, 'All fields are required.');
             return;
         }
 
         if (formData.password !== cpassword.value.trim()) {
-            UTILS.showMessage('Passwords do not match.', 'error');
+            UTILS.showFormError(form, 'Passwords do not match.');
             return;
         }
 
         if (!/^\d{10}$/.test(formData.phno)) {
-            UTILS.showMessage('Phone number must be exactly 10 digits.', 'info');
+            UTILS.showFormError(form, 'Phone number must be exactly 10 digits.');
             return;
         }
 
         if (!/^\d{12}$/.test(formData.aadhar)) {
-            UTILS.showMessage('Aadhar number must be exactly 12 digits.', 'info');
+            UTILS.showFormError(form, 'Aadhar number must be exactly 12 digits.');
             return;
         }
 
@@ -63,7 +69,7 @@ if (form) {
             const userMsg = error.message.includes('Failed to fetch') 
                 ? 'Unable to connect to the server. Please try again.' 
                 : error.message;
-            UTILS.showMessage(userMsg, 'error');
+            UTILS.showFormError(form, userMsg);
         } finally {
             if (submitBtn) {
                 submitBtn.textContent = originalText;

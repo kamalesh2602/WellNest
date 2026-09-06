@@ -3,32 +3,54 @@
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('admin-login-form');
     if (loginForm) {
+        loginForm.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', () => UTILS.clearFormError(loginForm));
+        });
         loginForm.addEventListener('submit', handleAdminLogin);
     }
 });
 
 async function handleAdminLogin(event) {
     event.preventDefault();
+    const loginForm = event.target;
+    UTILS.clearFormError(loginForm);
     
     const adminpasswdInput = document.getElementById('adminpasswd');
     const secret = adminpasswdInput.value.trim();
 
     if (!secret) {
-        alert('Please enter the Admin Password.');
+        UTILS.showFormError(loginForm, 'Please enter the Admin Password.');
         return;
+    }
+
+    const submitBtn = loginForm.querySelector('button[type="submit"]');
+    const originalText = submitBtn ? submitBtn.textContent : 'Verify & Log In';
+    if (submitBtn) {
+        submitBtn.textContent = 'Verifying...';
+        submitBtn.disabled = true;
     }
 
     try {
         // Submit secret to server check
-        const response = await API.loginAdmin(secret);
+        await API.loginAdmin(secret);
         
         // Save secret to session storage
         sessionStorage.setItem('adminSecret', secret);
         
-        alert('✅ Login successful! Welcome Admin.');
-        window.location.href = 'admindashboard.html';
+        UTILS.showMessage('Welcome Admin!', 'success');
+        setTimeout(() => {
+            window.location.href = 'admindashboard.html';
+        }, 800);
     } catch (error) {
         console.error('Admin login error:', error);
-        alert(`❌ Invalid Admin credentials: ${error.message}`);
+        const userMsg = error.message.includes('Failed to fetch') 
+            ? 'Unable to connect to the server. Please try again.' 
+            : error.message;
+        UTILS.showFormError(loginForm, userMsg);
+    } finally {
+        if (submitBtn) {
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        }
     }
 }

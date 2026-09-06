@@ -1,18 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('counsellor-login-form');
     if (loginForm) {
+        loginForm.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', () => UTILS.clearFormError(loginForm));
+        });
         loginForm.addEventListener('submit', handleCounsellorLogin);
     }
 });
 
 async function handleCounsellorLogin(e) {
     e.preventDefault();
+    const loginForm = e.target;
+    UTILS.clearFormError(loginForm);
 
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value.trim();
 
     if (!email || !password) {
-        UTILS.showMessage('Please enter your email and password.', 'info');
+        UTILS.showFormError(loginForm, 'Please enter your email and password.');
         return;
     }
 
@@ -40,7 +45,7 @@ async function handleCounsellorLogin(e) {
         const userMsg = error.message.includes('Failed to fetch') 
             ? 'Unable to connect to the server. Please try again.' 
             : error.message;
-        UTILS.showMessage(userMsg, 'error');
+        UTILS.showFormError(loginForm, userMsg);
     } finally {
         if (submitBtn) {
             submitBtn.textContent = originalText;

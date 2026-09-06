@@ -1,12 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const signupForm = document.getElementById('user-signup-form');
+    const signupForm = document.getElementById('user-signup-form') || document.getElementById('form');
     if (signupForm) {
+        signupForm.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', () => UTILS.clearFormError(signupForm));
+        });
         signupForm.addEventListener('submit', handleUserSignup);
     }
 });
 
 async function handleUserSignup(e) {
     e.preventDefault();
+    const signupForm = e.target;
+    UTILS.clearFormError(signupForm);
 
     const name = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim();
@@ -17,25 +22,25 @@ async function handleUserSignup(e) {
 
     // Field requirements check
     if (!name || !email || !phno || !aadhar || !password || !cpassword) {
-        UTILS.showMessage('All fields are required.', 'info');
+        UTILS.showFormError(signupForm, 'All fields are required.');
         return;
     }
 
     // Password matches check
     if (password !== cpassword) {
-        UTILS.showMessage('Passwords do not match.', 'error');
+        UTILS.showFormError(signupForm, 'Passwords do not match.');
         return;
     }
 
     // Phone number format validation (exactly 10 digits)
     if (!/^\d{10}$/.test(phno)) {
-        UTILS.showMessage('Phone number must be exactly 10 digits.', 'info');
+        UTILS.showFormError(signupForm, 'Phone number must be exactly 10 digits.');
         return;
     }
 
     // Aadhar number format validation (exactly 12 digits)
     if (!/^\d{12}$/.test(aadhar)) {
-        UTILS.showMessage('Aadhar number must be exactly 12 digits.', 'info');
+        UTILS.showFormError(signupForm, 'Aadhar number must be exactly 12 digits.');
         return;
     }
 
@@ -65,7 +70,7 @@ async function handleUserSignup(e) {
         const userMsg = error.message.includes('Failed to fetch') 
             ? 'Unable to connect to the server. Please try again.' 
             : error.message;
-        UTILS.showMessage(userMsg, 'error');
+        UTILS.showFormError(signupForm, userMsg);
     } finally {
         if (submitBtn) {
             submitBtn.textContent = originalText;

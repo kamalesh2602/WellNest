@@ -277,3 +277,21 @@ a:hover {
   border-color: var(--wn-border-focus);
   box-shadow: 0 0 0 3px rgba(194, 125, 136, 0.2);
 }
+
+/* ==========================================================================
+   Alerts & Error Banners
+   ========================================================================== */
+
+.wn-alert-error {
+  background-color: #FAECEE;
+  border: 1px solid #C27D88;
+  color: #9C5353;
+  border-radius: var(--wn-radius-md);
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 1.25rem;
+  animation: wnFadeIn 0.3s ease;
+  text-align: left;
+  line-height: 1.45;
+}

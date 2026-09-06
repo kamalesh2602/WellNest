@@ -53,6 +53,27 @@ const UTILS = {
         }
     },
 
+    // Display form error banner in #error-message
+    showFormError(formEl, message) {
+        const errEl = (formEl && formEl.querySelector('#error-message')) || document.getElementById('error-message');
+        if (errEl) {
+            errEl.textContent = message;
+            errEl.style.display = 'block';
+            errEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } else {
+            this.showMessage(message, 'error');
+        }
+    },
+
+    // Clear form error banner
+    clearFormError(formEl) {
+        const errEl = (formEl && formEl.querySelector('#error-message')) || document.getElementById('error-message');
+        if (errEl) {
+            errEl.textContent = '';
+            errEl.style.display = 'none';
+        }
+    },
+
     // Reusable message toast notification ('success', 'error', 'info')
     showMessage(message, type = 'info', duration = 3500) {
         let toastContainer = document.getElementById('toast-container');

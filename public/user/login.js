@@ -8,14 +8,20 @@ const nameemail = document.querySelector('#nameemail');
 const password = document.querySelector('#password');
 
 if (form) {
+    // Clear error banner when user types
+    form.querySelectorAll('input').forEach(input => {
+        input.addEventListener('input', () => UTILS.clearFormError(form));
+    });
+
     form.addEventListener('submit', async function (e) {
         e.preventDefault();
+        UTILS.clearFormError(form);
 
         const inputNameEmail = nameemail.value.trim();
         const inputPassword = password.value.trim();
 
         if (!inputNameEmail || !inputPassword) {
-            UTILS.showMessage('Please enter your name or email and password.', 'info');
+            UTILS.showFormError(form, 'Please enter your name or email and password.');
             return;
         }
 
@@ -41,7 +47,7 @@ if (form) {
             const userMsg = error.message.includes('Failed to fetch') 
                 ? 'Unable to connect to the server. Please try again.' 
                 : error.message;
-            UTILS.showMessage(userMsg, 'error');
+            UTILS.showFormError(form, userMsg);
         } finally {
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
