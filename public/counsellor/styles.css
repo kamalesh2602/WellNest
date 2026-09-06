@@ -241,4 +241,17 @@ footer {
   .slot-row {
     flex-direction: column;
   }
+
+  .container {
+    width: 95%;
+    margin: 1.5rem auto;
+  }
+
+  form {
+    padding: 1.75rem 1.25rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+  }
 }

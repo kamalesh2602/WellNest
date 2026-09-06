@@ -295,3 +295,63 @@ a:hover {
   text-align: left;
   line-height: 1.45;
 }
+
+/* ==========================================================================
+   Shared Header Logo Link
+   ========================================================================== */
+
+.logo-link {
+  text-decoration: none;
+  color: inherit;
+  display: inline-block;
+  transition: opacity var(--wn-transition-fast);
+}
+
+.logo-link:hover {
+  opacity: 0.82;
+  color: inherit;
+}
+
+/* ==========================================================================
+   Mobile Responsiveness (shared across all pages)
+   ========================================================================== */
+
+@media (max-width: 600px) {
+  /* Shared header tightening */
+  header,
+  .user-header {
+    padding: 0.85rem 1.1rem !important;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+  }
+
+  /* Logo title scaling */
+  header h1,
+  .user-header .logo h1,
+  .logo h1 {
+    font-size: 1.35rem !important;
+  }
+
+  /* Nav wrapping & smaller pills */
+  nav ul {
+    flex-wrap: wrap;
+    gap: 0.45rem !important;
+  }
+
+  .nav-pill {
+    padding: 0.4rem 0.85rem !important;
+    font-size: 0.8rem !important;
+  }
+
+  /* Container padding on mobile */
+  .wn-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Buttons full-width on small screens */
+  .wn-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -163,3 +163,19 @@ footer {
   background: transparent;
   font-size: 0.85rem;
 }
+
+/* ==========================================================================
+   Mobile Responsiveness
+   ========================================================================== */
+
+@media (max-width: 480px) {
+  .container {
+    margin: 2rem auto;
+    padding: 2rem 1.25rem;
+    width: 94%;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+}

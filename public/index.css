@@ -173,3 +173,33 @@
   color: var(--wn-text-light);
   padding-top: 1.5rem;
 }
+
+/* ==========================================================================
+   Mobile Responsiveness
+   ========================================================================== */
+
+@media (max-width: 480px) {
+  .index-body {
+    padding: 1.5rem 1rem;
+  }
+
+  .brand-title {
+    font-size: 2rem;
+  }
+
+  .welcome-text h2 {
+    font-size: 1.5rem;
+  }
+
+  .welcome-text p {
+    font-size: 0.95rem;
+  }
+
+  .portal-links {
+    grid-template-columns: 1fr;
+  }
+
+  .portal-link {
+    padding: 1.25rem;
+  }
+}
