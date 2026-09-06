@@ -1,0 +1,279 @@
+/* ==========================================================================
+   WellNest 2.0 - Core Design System & Theme Stylesheet
+   Palette: Warm Linen, Dusty Blush, Terracotta & Deep Espresso
+   Target: Safe sanctuary for women & children
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Surface & Background Tones */
+  --wn-bg-canvas: #FDFBF7;           /* Warm linen foundation */
+  --wn-bg-surface: #FFFFFF;          /* Card & container white */
+  --wn-bg-surface-soft: #F7F2ED;     /* Subtle section tint */
+  --wn-bg-subtle-rose: #FAECEE;      /* Gentle blush fill for highlights/chips */
+
+  /* Primary Brand Colors */
+  --wn-primary-rose: #C27D88;        /* Soft dusty rose */
+  --wn-primary-rose-hover: #AF6A75;  /* Hover state */
+  --wn-primary-rose-light: #F4D9DD;  /* Border / light accent */
+
+  /* Grounding & Accent Colors */
+  --wn-accent-terracotta: #9C5353;   /* Deep clay/terracotta for CTAs & weight */
+  --wn-accent-terracotta-hover: #844242;
+  --wn-accent-sage: #8FA89B;         /* Gentle balance tone for health/growth */
+
+  /* Typography & High-Contrast Text */
+  --wn-text-main: #332427;           /* Deep espresso rose (high legibility) */
+  --wn-text-muted: #7A696C;          /* Subtitles and secondary info */
+  --wn-text-light: #A39295;          /* Placeholders and inactive labels */
+  --wn-text-on-dark: #FFFFFF;
+
+  /* Borders & Dividers */
+  --wn-border-subtle: rgba(156, 83, 83, 0.12);
+  --wn-border-focus: #C27D88;
+
+  /* Shadows (Soft & Diffused) */
+  --wn-shadow-sm: 0 2px 6px rgba(74, 46, 53, 0.04);
+  --wn-shadow-md: 0 8px 24px rgba(74, 46, 53, 0.07);
+  --wn-shadow-lg: 0 16px 36px rgba(74, 46, 53, 0.1);
+
+  /* Curvatures (Friendly & Organic) */
+  --wn-radius-sm: 8px;
+  --wn-radius-md: 14px;
+  --wn-radius-lg: 20px;
+  --wn-radius-full: 9999px;
+
+  /* Transition timings */
+  --wn-transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --wn-transition-smooth: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base Reset & Typography Setup */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--wn-bg-canvas);
+  color: var(--wn-text-main);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4 {
+  color: var(--wn-text-main);
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+p {
+  color: var(--wn-text-muted);
+}
+
+a {
+  color: var(--wn-accent-terracotta);
+  text-decoration: none;
+  transition: color var(--wn-transition-fast);
+}
+
+a:hover {
+  color: var(--wn-primary-rose-hover);
+}
+
+/* ==========================================================================
+   Smooth Fade & Entrance Animations
+   ========================================================================== */
+
+@keyframes wnFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes wnPulseSoft {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+/* Apply to entire page container or individual sections */
+.wn-fade-in {
+  animation: wnFadeIn 0.5s ease-out forwards;
+}
+
+.wn-fade-in-delayed {
+  animation: wnFadeIn 0.7s ease-out 0.15s backwards;
+}
+
+/* ==========================================================================
+   Layout Helpers
+   ========================================================================== */
+
+.wn-container {
+  max-width: 1180px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.wn-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.wn-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* ==========================================================================
+   Cards & Surfaces
+   ========================================================================== */
+
+.wn-card {
+  background-color: var(--wn-bg-surface);
+  border: 1px solid var(--wn-border-subtle);
+  border-radius: var(--wn-radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--wn-shadow-sm);
+  transition: transform var(--wn-transition-smooth), 
+              box-shadow var(--wn-transition-smooth),
+              border-color var(--wn-transition-smooth);
+}
+
+.wn-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--wn-shadow-md);
+  border-color: var(--wn-primary-rose-light);
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.wn-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--wn-radius-full);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--wn-transition-fast);
+  text-decoration: none;
+}
+
+.wn-btn-primary {
+  background-color: var(--wn-accent-terracotta);
+  color: var(--wn-text-on-dark);
+  box-shadow: 0 4px 12px rgba(156, 83, 83, 0.25);
+}
+
+.wn-btn-primary:hover {
+  background-color: var(--wn-accent-terracotta-hover);
+  color: var(--wn-text-on-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(156, 83, 83, 0.32);
+}
+
+.wn-btn-soft {
+  background-color: var(--wn-bg-subtle-rose);
+  color: var(--wn-accent-terracotta);
+}
+
+.wn-btn-soft:hover {
+  background-color: var(--wn-primary-rose-light);
+  color: var(--wn-accent-terracotta-hover);
+}
+
+.wn-btn-outline {
+  background-color: transparent;
+  border-color: var(--wn-primary-rose);
+  color: var(--wn-primary-rose-hover);
+}
+
+.wn-btn-outline:hover {
+  background-color: var(--wn-bg-subtle-rose);
+}
+
+/* ==========================================================================
+   Badges / Tags
+   ========================================================================== */
+
+.wn-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--wn-radius-full);
+}
+
+.wn-badge-rose {
+  background-color: var(--wn-bg-subtle-rose);
+  color: var(--wn-accent-terracotta);
+}
+
+.wn-badge-sage {
+  background-color: #E8F0EC;
+  color: #3E6250;
+}
+
+/* ==========================================================================
+   Form Elements (Inputs & Selects)
+   ========================================================================== */
+
+.wn-input-group {
+  margin-bottom: 1.25rem;
+}
+
+.wn-label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: var(--wn-text-main);
+}
+
+.wn-input,
+.wn-select,
+.wn-textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: var(--wn-radius-md);
+  border: 1px solid var(--wn-border-subtle);
+  background-color: var(--wn-bg-surface);
+  color: var(--wn-text-main);
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color var(--wn-transition-fast), box-shadow var(--wn-transition-fast);
+}
+
+.wn-input:focus,
+.wn-select:focus,
+.wn-textarea:focus {
+  border-color: var(--wn-border-focus);
+  box-shadow: 0 0 0 3px rgba(194, 125, 136, 0.2);
+}

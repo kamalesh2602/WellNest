@@ -1,89 +1,175 @@
-/* --- Global Reset --- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Arial, sans-serif;
+/* ==========================================================================
+   WellNest 2.0 - Landing Page Styles (index.css)
+   Requires: assets/css/theme.css
+   ========================================================================== */
+
+.index-body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: radial-gradient(circle at 50% 18%, #FAF2EC 0%, var(--wn-bg-canvas) 65%);
+  padding: 2.5rem 1.5rem;
 }
 
-body {
-    background-color: #0a0a0a; /* Deep Black */
-    color: #fff;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+/* Header & Logo */
+.index-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-/* --- Animations --- */
-@keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-30px); }
-    to { opacity: 1; transform: translateY(0); }
+.brand-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--wn-accent-terracotta);
+  background-color: var(--wn-bg-subtle-rose);
+  padding: 0.35rem 0.9rem;
+  border-radius: var(--wn-radius-full);
 }
 
-@keyframes slideInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+.brand-dot {
+  width: 7px;
+  height: 7px;
+  background-color: var(--wn-primary-rose);
+  border-radius: 50%;
 }
 
-/* --- Header Styling --- */
-header {
-    padding: 60px 20px;
-    background: linear-gradient(180deg, #ff4d6d 0%, #0a0a0a 100%);
-    text-align: center;
-    animation: fadeInDown 0.8s ease-out;
+.brand-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--wn-text-main);
 }
 
-header h1 {
-    font-size: 64px;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 8px;
-    color: #fff;
-    text-shadow: 0 0 20px rgba(255, 77, 109, 0.6);
+/* Central Content Container */
+.welcome-container {
+  width: 100%;
+  max-width: 680px;
+  margin: 1.5rem auto;
+  text-align: center;
 }
 
-/* --- Centering the Navigation --- */
-.container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    animation: slideInUp 1s ease-out;
+.welcome-text h2 {
+  font-size: 1.95rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin-bottom: 0.85rem;
+  color: var(--wn-text-main);
 }
 
-/* --- Navigation Boxes --- */
+.welcome-text p {
+  font-size: 1.05rem;
+  color: var(--wn-text-muted);
+  line-height: 1.7;
+  max-width: 580px;
+  margin: 0 auto 2.5rem auto;
+}
+
+/* Interactive Portal Cards */
+.portal-links {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 600px) {
+  .portal-links {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 .portal-link {
-    display: block;
-    width: 300px;
-    padding: 20px;
-    font-size: 22px;
-    text-decoration: none;
-    color: #fff;
-    background-color: #1a1a1a; /* Dark grey */
-    border: 2px solid #ff4d6d;
-    border-radius: 50px; /* Rounded pill shape */
-    text-align: center;
-    font-weight: bold;
-    letter-spacing: 2px;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 4px 15px rgba(255, 77, 109, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1.6rem;
+  background: var(--wn-bg-surface);
+  border: 1px solid var(--wn-border-subtle);
+  border-radius: var(--wn-radius-lg);
+  box-shadow: var(--wn-shadow-sm);
+  text-align: left;
+  position: relative;
+  transition: transform var(--wn-transition-smooth), 
+              box-shadow var(--wn-transition-smooth), 
+              border-color var(--wn-transition-smooth);
 }
 
-/* --- Hover Effects --- */
 .portal-link:hover {
-    background-color: #ff4d6d;
-    color: #000;
-    transform: scale(1.1);
-    box-shadow: 0 0 30px rgba(255, 77, 109, 0.8);
+  transform: translateY(-4px);
+  box-shadow: var(--wn-shadow-md);
+  border-color: var(--wn-primary-rose-light);
 }
 
-/* --- Footer logic for index --- */
-footer {
-    padding: 20px;
-    text-align: center;
-    color: #444;
-    font-size: 14px;
+/* User Card Variation */
+.portal-card-user:hover {
+  background: linear-gradient(180deg, #FFFFFF 0%, #FDF8F8 100%);
+}
+
+/* Counsellor Card Variation */
+.portal-card-counsellor:hover {
+  background: linear-gradient(180deg, #FFFFFF 0%, #FBF7F5 100%);
+}
+
+/* Card Badges */
+.portal-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--wn-radius-full);
+  background-color: var(--wn-bg-subtle-rose);
+  color: var(--wn-accent-terracotta);
+  margin-bottom: 1.2rem;
+}
+
+.portal-badge-alt {
+  background-color: #F1EFEA;
+  color: #5C4D46;
+}
+
+/* Typography Inside Cards */
+.portal-info {
+  margin-bottom: 1rem;
+}
+
+.portal-title {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--wn-text-main);
+  margin-bottom: 0.35rem;
+}
+
+.portal-desc {
+  display: block;
+  font-size: 0.88rem;
+  color: var(--wn-text-muted);
+  line-height: 1.5;
+}
+
+/* Arrow Accent */
+.portal-arrow {
+  font-size: 1.2rem;
+  color: var(--wn-accent-terracotta);
+  transition: transform var(--wn-transition-fast);
+}
+
+.portal-link:hover .portal-arrow {
+  transform: translateX(4px);
+}
+
+/* Footer */
+.index-footer {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--wn-text-light);
+  padding-top: 1.5rem;
 }

@@ -1,110 +1,115 @@
-/* --- Global Reset & Theme --- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Arial, sans-serif;
-}
+/* ==========================================================================
+   WellNest 2.0 - Video Consultation Styles (user/video.css)
+   Requires: ../theme.css
+   ========================================================================== */
 
 body {
-    background-color: #fff5f8; /* Soft Blush White */
-    color: #333;
-    padding: 20px;
-    text-align: center;
-    min-height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--wn-bg-canvas);
+  color: var(--wn-text-main);
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  margin: 0;
 }
 
-/* --- Navigation & Feedback Bar --- */
+/* Navigation & Feedback Bar */
 .feedback {
-    background: #ffffff;
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(255, 77, 148, 0.1);
-    margin-bottom: 30px;
-    border-left: 5px solid #ff4d94;
+  background: var(--wn-bg-surface);
+  padding: 1rem 1.5rem;
+  border-radius: var(--wn-radius-md);
+  box-shadow: var(--wn-shadow-sm);
+  margin-bottom: 2rem;
+  border-left: 4px solid var(--wn-accent-terracotta);
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 0.95rem;
 }
 
 .feedback a {
-    color: #ff4d94;
-    text-decoration: none;
-    font-weight: 600;
-    margin: 0 10px;
-    transition: color 0.3s;
+  color: var(--wn-accent-terracotta);
+  text-decoration: none;
+  font-weight: 600;
+  margin: 0 0.5rem;
+  transition: color var(--wn-transition-fast);
 }
 
 .feedback a:hover {
-    color: #333;
+  color: var(--wn-primary-rose-hover);
+  text-decoration: underline;
 }
 
-/* --- Meeting Headers --- */
+/* Meeting Headers */
 h2 {
-    color: #ff4d94;
-    font-size: 2rem;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+  color: var(--wn-text-main);
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.015em;
 }
 
 #meeting-info {
-    font-size: 1.1rem;
-    color: #555;
-    margin-bottom: 10px;
+  font-size: 1.05rem;
+  color: var(--wn-text-muted);
+  margin-bottom: 0.5rem;
 }
 
 #time-message {
-    font-weight: bold;
-    color: #ff1a75;
-    margin-bottom: 20px;
+  font-weight: 600;
+  color: var(--wn-accent-terracotta);
+  margin-bottom: 1.5rem;
 }
 
-/* --- The Join Button --- */
+/* Join Button */
 #join-btn {
-    padding: 15px 40px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: white;
-    background-color: #ff4d94;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(255, 77, 148, 0.3);
-    margin-bottom: 30px;
+  padding: 0.85rem 2.5rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--wn-text-on-dark);
+  background-color: var(--wn-accent-terracotta);
+  border: none;
+  border-radius: var(--wn-radius-full);
+  cursor: pointer;
+  transition: all var(--wn-transition-fast);
+  box-shadow: 0 4px 12px rgba(156, 83, 83, 0.25);
+  margin-bottom: 2rem;
 }
 
 #join-btn:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-    box-shadow: none;
-    transform: scale(1);
+  background-color: var(--wn-text-light);
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+  opacity: 0.6;
 }
 
 #join-btn:not(:disabled):hover {
-    background-color: #ff1a75;
-    transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(255, 77, 148, 0.4);
+  background-color: var(--wn-accent-terracotta-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(156, 83, 83, 0.32);
 }
 
-/* --- Video Container --- */
+/* Video Frame Container */
 #meet {
-    width: 90%;
-    max-width: 1000px;
-    height: 600px;
-    margin: 0 auto;
-    background: #000; /* Black background for the video area */
-    border-radius: 15px;
-    overflow: hidden;
-    border: 3px solid #ff4d94;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 1000px;
+  height: 600px;
+  margin: 0 auto;
+  background: #000;
+  border-radius: var(--wn-radius-lg);
+  overflow: hidden;
+  border: 2px solid var(--wn-border-subtle);
+  box-shadow: var(--wn-shadow-lg);
 }
 
-/* --- Animations --- */
-@keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.7; }
-    100% { opacity: 1; }
+@keyframes wnPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
 }
 
 #time-message:not(:empty) {
-    animation: pulse 2s infinite ease-in-out;
+  animation: wnPulse 2s infinite ease-in-out;
 }

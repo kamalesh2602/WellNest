@@ -1,28 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 :root {
-    --primary-color: #3a6053;
-    --primary-hover: #2c4a3f;
-    --primary-light: rgba(58, 96, 83, 0.08);
-    --accent-color: #d8a499;
-    --accent-hover: #c48f84;
-    --bg-color: #f4f7f6;
-    --card-bg: #ffffff;
-    --text-main: #2c3e35;
-    --text-muted: #708a80;
-    --border-color: #e0e6e4;
-    --danger-color: #c56e6e;
-    --danger-hover: #b05e5e;
-    --success-color: #63a375;
-    --font-family: 'Outfit', 'Segoe UI', Arial, sans-serif;
+    --primary-color: #9C5353;
+    --primary-hover: #844242;
+    --primary-light: #FAECEE;
+    --accent-color: #C27D88;
+    --accent-hover: #AF6A75;
+    --bg-color: #FDFBF7;
+    --card-bg: #FFFFFF;
+    --text-main: #332427;
+    --text-muted: #7A696C;
+    --border-color: rgba(156, 83, 83, 0.12);
+    --danger-color: #B24C4C;
+    --danger-hover: #963B3B;
+    --success-color: #5C8A72;
+    --font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     
-    --border-radius-lg: 16px;
-    --border-radius-md: 10px;
-    --border-radius-sm: 6px;
+    --border-radius-lg: 18px;
+    --border-radius-md: 12px;
+    --border-radius-sm: 8px;
     
-    --shadow-sm: 0 2px 8px rgba(58, 96, 83, 0.04);
-    --shadow-md: 0 8px 24px rgba(58, 96, 83, 0.06);
-    --shadow-lg: 0 16px 40px rgba(58, 96, 83, 0.1);
+    --shadow-sm: 0 2px 6px rgba(74, 46, 53, 0.04);
+    --shadow-md: 0 8px 24px rgba(74, 46, 53, 0.07);
+    --shadow-lg: 0 16px 36px rgba(74, 46, 53, 0.1);
 }
 
 /* --- Base Reset --- */

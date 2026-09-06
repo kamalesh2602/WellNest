@@ -5,28 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WellNest | Welcome</title>
     <link rel="icon" type="image/jpeg" href="assets/images/wnlogo.jpg">
-    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="theme.css">
+    <link rel="stylesheet" href="index.css">
 </head>
-<body>
+<body class="index-body">
 
-    <header>
-        <h1>WellNest</h1>
+    <header class="index-header wn-fade-in">
+        <div class="brand-badge">
+            <span class="brand-dot"></span> Safe & Supportive Care
+        </div>
+        <h1 class="brand-title">WellNest</h1>
     </header>
 
-    <main class="welcome-container">
+    <main class="welcome-container wn-fade-in-delayed">
         <div class="welcome-text">
             <h2>Your Sanctuary for Well-being</h2>
             <p>Welcome to a safe, supportive, and empowering digital space designed to connect you with professional care and resources.</p>
         </div>
+
         <div class="portal-links">
-            <a href="user/home.html" class="portal-link">User Portal</a>
-            <a href="counsellor/clogin.html" class="portal-link portal-link-alt">Counsellor Portal</a>
+            <a href="user/home.html" class="portal-link portal-card-user">
+                <div class="portal-badge">Women & Children</div>
+                <div class="portal-info">
+                    <span class="portal-title">User Portal</span>
+                    <span class="portal-desc">Explore guidance, self-care tools, and private consultations.</span>
+                </div>
+                <span class="portal-arrow">&rarr;</span>
+            </a>
+
+            <a href="counsellor/clogin.html" class="portal-link portal-card-counsellor">
+                <div class="portal-badge portal-badge-alt">Specialist Access</div>
+                <div class="portal-info">
+                    <span class="portal-title">Counsellor Portal</span>
+                    <span class="portal-desc">Manage sessions, client support notes, and appointments.</span>
+                </div>
+                <span class="portal-arrow">&rarr;</span>
+            </a>
+            
             <!-- Keep admin portal completely unlinked publicly as requested -->
             <!-- <a href="admin/admin.html" class="portal-link">Admin Portal</a> -->
         </div>
     </main>
 
-    <footer>
+    <footer class="index-footer wn-fade-in-delayed">
         &copy; 2026 WellNest - Safety & Well-being
     </footer>
 

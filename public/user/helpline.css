@@ -1,135 +1,156 @@
-/* --- Global Reset & Theme --- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+/* ==========================================================================
+   WellNest 2.0 - Helpline Contacts Styles (user/helpline.css)
+   Requires: ../theme.css
+   ========================================================================== */
 
 body {
-    background-color: #fff5f8; /* Soft Blush White */
-    color: #333;
-    line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--wn-bg-canvas);
+  color: var(--wn-text-main);
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-/* --- Animations --- */
-@keyframes slideIn {
-    from { opacity: 0; transform: translateX(-20px); }
-    to { opacity: 1; transform: translateX(0); }
-}
-
-/* --- Header & Navigation --- */
+/* Header Navigation */
 header {
-    background-color: #ffffff;
-    padding: 1rem 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 10px rgba(255, 77, 148, 0.1);
-    border-bottom: 3px solid #ff4d94;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 2.5rem;
+  background-color: var(--wn-bg-surface);
+  border-bottom: 1px solid var(--wn-border-subtle);
+  box-shadow: var(--wn-shadow-sm);
 }
 
 .logo h1 {
-    color: #ff4d94;
-    font-weight: 800;
+  font-size: 1.8rem;
+  color: var(--wn-accent-terracotta);
+  letter-spacing: -0.02em;
+  margin: 0;
 }
 
 nav ul {
-    display: flex;
-    list-style: none;
-    gap: 15px;
+  list-style: none;
+  display: flex;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
 }
 
-nav ul li a {
-    text-decoration: none;
-    color: #ff4d94;
-    font-weight: 600;
-    padding: 8px 15px;
-    border: 1px solid #ff4d94;
-    border-radius: 20px;
-    transition: 0.3s;
+.nav-pill {
+  padding: 0.55rem 1.4rem;
+  border-radius: var(--wn-radius-full);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--wn-text-main);
+  background-color: var(--wn-bg-surface-soft);
+  border: 1px solid var(--wn-border-subtle);
+  transition: all var(--wn-transition-fast);
+  text-decoration: none;
 }
 
-nav ul li a:hover {
-    background: #ff4d94;
-    color: #fff;
+.nav-pill:hover {
+  background-color: var(--wn-bg-subtle-rose);
+  color: var(--wn-accent-terracotta);
+  border-color: var(--wn-primary-rose-light);
 }
 
-/* --- Main Content Layout --- */
+/* Main Content Layout */
 #main {
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 0 20px;
-    animation: slideIn 0.8s ease-out;
+  max-width: 980px;
+  width: 90%;
+  margin: 3rem auto;
+}
+
+#main_content {
+  background: var(--wn-bg-surface);
+  padding: 2.75rem 2.25rem;
+  border-radius: var(--wn-radius-lg);
+  border: 1px solid var(--wn-border-subtle);
+  box-shadow: var(--wn-shadow-sm);
 }
 
 #main_content h1 {
-    color: #ff4d94;
-    font-size: 2.2rem;
-    margin-bottom: 10px;
-    text-align: center;
+  color: var(--wn-text-main);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  text-align: center;
+  letter-spacing: -0.015em;
 }
 
 #main_content h3 {
-    color: #ff1a75;
-    margin: 30px 0 15px 0;
-    border-left: 5px solid #ff4d94;
-    padding-left: 15px;
+  color: var(--wn-accent-terracotta);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 2.25rem 0 1.25rem 0;
+  border-left: 4px solid var(--wn-accent-terracotta);
+  padding-left: 0.85rem;
 }
 
 #main_content p {
-    text-align: center;
-    color: #666;
-    margin-bottom: 30px;
-    font-style: italic;
+  text-align: center;
+  color: var(--wn-text-muted);
+  margin-bottom: 2rem;
+  font-size: 0.98rem;
+  line-height: 1.7;
 }
 
-/* --- List to Card Transformation --- */
+/* List Cards */
 ul {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  padding: 0;
+  margin: 0;
 }
 
 li {
-    background: #fff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    border-left: 4px solid #ff4d94;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: var(--wn-bg-surface-soft);
+  padding: 1.35rem 1.25rem;
+  border-radius: var(--wn-radius-md);
+  box-shadow: var(--wn-shadow-sm);
+  border: 1px solid var(--wn-border-subtle);
+  border-left: 4px solid var(--wn-primary-rose);
+  transition: transform var(--wn-transition-smooth), box-shadow var(--wn-transition-smooth), border-color var(--wn-transition-smooth);
 }
 
 li:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 15px rgba(255, 77, 148, 0.1);
+  transform: translateY(-3px);
+  box-shadow: var(--wn-shadow-md);
+  border-color: var(--wn-primary-rose-light);
+  border-left-color: var(--wn-accent-terracotta);
 }
 
 li b {
-    display: block;
-    color: #ff4d94;
-    font-size: 1.1rem;
-    margin-bottom: 5px;
+  display: block;
+  color: var(--wn-text-main);
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
 }
 
-/* --- Footer --- */
+/* Footer */
 footer {
-    text-align: center;
-    padding: 40px 20px;
-    color: #888;
-    background: #fff;
-    border-top: 1px solid #eee;
-    margin-top: 50px;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  color: var(--wn-text-light);
+  background: transparent;
+  font-size: 0.85rem;
+  margin-top: 2rem;
 }
 
-/* --- Responsive Adjustments --- */
 @media (max-width: 600px) {
-    #main_content h1 {
-        font-size: 1.8rem;
-    }
-    
-    ul {
-        grid-template-columns: 1fr;
-    }
+  #main_content h1 {
+    font-size: 1.6rem;
+  }
+  
+  ul {
+    grid-template-columns: 1fr;
+  }
 }

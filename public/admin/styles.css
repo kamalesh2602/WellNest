@@ -1,155 +1,173 @@
-/* --- Global Reset & Theme --- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Arial, sans-serif;
-}
+/* ==========================================================================
+   WellNest 2.0 - Admin Portal Styles (admin/styles.css)
+   Requires: ../theme.css
+   ========================================================================== */
 
 body {
-    background-color: #0d0d0d;
-    color: #e0e0e0;
-    min-height: 100vh;
-    padding: 20px;
-    line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--wn-bg-canvas);
+  color: var(--wn-text-main);
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-/* --- Animations --- */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 2.5rem;
+  background-color: var(--wn-bg-surface);
+  border-bottom: 1px solid var(--wn-border-subtle);
+  box-shadow: var(--wn-shadow-sm);
 }
 
-/* --- Layout Components --- */
+header h1 {
+  font-size: 1.8rem;
+  color: var(--wn-accent-terracotta);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
 .container, .admin-container, .users-container {
-    max-width: 1000px;
-    margin: 40px auto;
-    animation: fadeIn 0.5s ease-out;
+  max-width: 1040px;
+  width: 90%;
+  margin: 3rem auto;
+  flex: 1;
 }
 
 /* Dashboard Grid */
 .admin-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
 }
 
 .section-box {
-    background: #1a1a1a;
-    border: 1px solid #333;
-    border-radius: 12px;
-    padding: 30px;
-    text-align: center;
-    transition: all 0.3s ease;
+  background: var(--wn-bg-surface);
+  border: 1px solid var(--wn-border-subtle);
+  border-radius: var(--wn-radius-lg);
+  padding: 2.25rem 1.75rem;
+  text-align: center;
+  box-shadow: var(--wn-shadow-sm);
+  transition: transform var(--wn-transition-smooth), box-shadow var(--wn-transition-smooth), border-color var(--wn-transition-smooth);
 }
 
 .section-box:hover {
-    border-color: #ff4d94;
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(255, 77, 148, 0.1);
+  border-color: var(--wn-primary-rose-light);
+  transform: translateY(-4px);
+  box-shadow: var(--wn-shadow-md);
 }
 
-/* --- Navigation & Links --- */
 .section-box-link {
-    display: inline-block;
-    text-decoration: none;
-    color: #ff4d94;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  color: var(--wn-accent-terracotta);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition: color var(--wn-transition-fast);
 }
 
 a.section-box-link[href="admindashboard.html"] {
-    margin-bottom: 20px;
-    border-bottom: 1px solid transparent;
+  margin-bottom: 1.5rem;
 }
 
 a.section-box-link:hover {
-    color: #fff;
-    border-bottom-color: #ff4d94;
+  color: var(--wn-primary-rose-hover);
 }
 
-/* --- Tables (Overrides your inline pink styles) --- */
+/* Tables */
 table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    margin-top: 20px;
-    background-color: #1a1a1a !important; /* Forces override */
-    border-radius: 10px;
-    overflow: hidden;
-    border: 1px solid #333 !important;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 1.5rem;
+  background-color: var(--wn-bg-surface) !important;
+  border-radius: var(--wn-radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--wn-border-subtle) !important;
+  box-shadow: var(--wn-shadow-sm);
 }
 
 th, td {
-    padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid #2a2a2a !important;
-    color: #eee !important;
+  padding: 1rem 1.25rem;
+  text-align: left;
+  border-bottom: 1px solid var(--wn-border-subtle) !important;
+  color: var(--wn-text-main) !important;
 }
 
 th {
-    background-color: #252525 !important;
-    color: #ff4d94 !important;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
+  background-color: var(--wn-bg-surface-soft) !important;
+  color: var(--wn-accent-terracotta) !important;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-tr:hover {
-    background-color: #222;
+tr:hover td {
+  background-color: var(--wn-bg-subtle-rose) !important;
 }
 
-/* --- Buttons --- */
 .delete-btn {
-    background-color: transparent;
-    color: #ff4d94;
-    border: 1px solid #ff4d94;
-    padding: 6px 15px;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: all 0.3s;
+  background-color: transparent;
+  color: var(--wn-accent-terracotta);
+  border: 1px solid var(--wn-accent-terracotta);
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  border-radius: var(--wn-radius-full);
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all var(--wn-transition-fast);
 }
 
 .delete-btn:hover {
-    background-color: #dc3545;
-    color: white;
-    border-color: #dc3545;
+  background-color: #B24C4C;
+  color: #FFFFFF;
+  border-color: #B24C4C;
 }
 
-/* Logout Button Adjustment */
-header, body > a[href="./admin.html"] {
-    position: relative;
-    z-index: 10;
-}
-
-/* --- Form Elements (Used in addcounsellors) --- */
 form {
-    background: #1a1a1a;
-    padding: 30px;
-    border-radius: 12px;
-    max-width: 500px;
-    margin: 0 auto;
+  background: var(--wn-bg-surface);
+  padding: 2.5rem;
+  border-radius: var(--wn-radius-lg);
+  max-width: 500px;
+  margin: 0 auto;
+  border: 1px solid var(--wn-border-subtle);
+  box-shadow: var(--wn-shadow-sm);
 }
 
 h2 {
-    color: #ff4d94;
-    margin-bottom: 20px;
-    font-weight: 300;
+  color: var(--wn-text-main);
+  margin-bottom: 1.5rem;
+  font-weight: 700;
 }
 
 .ips input {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    background: #262626;
-    border: 1px solid #333;
-    border-radius: 6px;
-    color: #fff;
+  width: 100%;
+  padding: 0.85rem 1.1rem;
+  margin-bottom: 1.15rem;
+  background: var(--wn-bg-canvas);
+  border: 1px solid var(--wn-border-subtle);
+  border-radius: var(--wn-radius-md);
+  color: var(--wn-text-main);
+  font-family: inherit;
+  font-size: 0.95rem;
 }
 
 .ips input:focus {
-    outline: none;
-    border-color: #ff4d94;
+  outline: none;
+  border-color: var(--wn-border-focus);
+}
+
+footer {
+  text-align: center;
+  padding: 1.75rem;
+  color: var(--wn-text-light);
+  background: transparent;
+  font-size: 0.85rem;
+  margin-top: auto;
 }
